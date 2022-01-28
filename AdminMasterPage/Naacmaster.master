@@ -1,0 +1,226 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Naacmaster.master.cs" Inherits="Naacmaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <link href="../NaacCustomFiles/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../NaacCustomFiles/css/ionicons.min.css" rel="stylesheet" />
+    <link href="../NaacCustomFiles/css/select2.min.css" rel="stylesheet" />
+    <link href="../NaacCustomFiles/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="../NaacCustomFiles/css/_all-skins.min.css" rel="stylesheet" />
+    <link href="../NaacCustomFiles/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="../css/customcssfile.css" rel="stylesheet" />
+<link href="https://db.onlinewebfonts.com/c/511031ed9122c8ea1450b18b876221fe?family=SF+Pro+Rounded" rel="stylesheet" type="text/css"/>
+    <script src="../js/customfile.js"></script>
+</head>
+        <body class="hold-transition skin-blue sidebar-mini">
+            <div class="wrapper">
+    <form id="form1" runat="server">
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+
+      <span class="logo-mini"><b>Naac</b>E</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg" style="text-align:left"><b>Naac</b> Easy</span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+    
+         <div class="input-group" style="width:400px; float:left;margin-top:7px;padding-left: 30px;">
+              
+          <input type="text" name="q" class="form-control" placeholder="Search for criteria, tasks, meeting notes, and more..." style="border-radius: 10px;height: 36px;width: 450px;" />
+         <span class="input-group-btn" style="left: -39px;">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat" style="background-color: #fff;border-radius: 10px;">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div> 
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+          
+        <ul class="nav navbar-nav">
+        
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                      page and may cause design problems
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-red"></i> 5 new members joined
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-user text-red"></i> You changed your username
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+        
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                 <span class="hidden-xs">Hi <b>Hemant Singh</b></span>
+              <img src="../Img/user2-160x160.jpg" class="user-image" alt="User Image" />
+             
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../Img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+
+                <p>
+                  Hemant Rana - Dot Net Developer
+                  <small>Member since Nov. 2020</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+         
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+ <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar" style="padding-left: 15px;
+    padding-right: 15px;">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+    
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+     
+      <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <a onclick="visibledashboard();" style="cursor:pointer">
+            <i class="fa fa-home"></i> <span>Dashboard</span>
+          </a>      
+        </li>
+        <li>
+          <a onclick="visiblemeetingtab();" style="cursor:pointer">
+            <i class="fa fa-book"></i> <span>Meeting Notes</span>
+          </a>      
+        </li>
+            <li>
+          <a onclick="visibletodotab();" style="cursor:pointer">
+            <i class="fa fa-calendar"></i> <span>To Do Task</span>
+          </a>      
+        </li>
+          <li class="header">CRITERIA</li>
+         <li class="treeview">
+             <div>
+               <ul class="sidebar-menu" data-widget="tree" id="menudemo">
+
+                   </ul>
+                 </div>
+             </li>
+          
+             <li class="header">Quick Links</li>
+           <li>
+                <a href="../UpLoad/SOP-General-University-as-on-01-01-2021.pdf" target="_blank">SOP General University  <i class="fa fa-external-link-square" style="float:right"></i></a> 
+                </li>
+                <li>
+                <a href="../UpLoad/NAAC Easy.docx" target="_blank">NAAC Easy <i class="fa fa-external-link-square" style="float:right"></i></a>
+                </li>
+                <li>
+                <a href="../UpLoad/NAAC Revised University Manual 06.4.2021.pdf" target="_blank">NAAC Revised University Manual <i class="fa fa-external-link-square" style="float:right"></i></a>
+                </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+      <div class="content-wrapper">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            
+        </asp:ContentPlaceHolder>
+          </div>
+
+    </form>
+     </div>
+            
+ <script src="../NaacCustomFiles/js/jquery.min.js"></script>
+<script src="../NaacCustomFiles/js/bootstrap.min.js"></script>
+            <script src="../NaacCustomFiles/js/select2.full.min.js"></script>
+<script src="../NaacCustomFiles/js/fastclick.js"></script>
+<script src="../NaacCustomFiles/js/adminlte.min.js"></script>
+<%-- <script src="../NaacCustomFiles/js/daterangepicker.js"></script>
+<script src="../NaacCustomFiles/js/bootstrap-datepicker.min.js"></script>--%>
+            <script src="../NaacCustomFiles/js/ckeditor.js"></script>
+<script src="../NaacCustomFiles/js/jquery.slimscroll.min.js"></script>   
+
+<script src="../NaacCustomFiles/js/dashboard2.js"></script>
+</body>
+     <script>
+         $(function () {
+             //Initialize Select2 Elements
+             $('.select2').select2()
+         });
+         $(function () {
+             // Replace the <textarea id="editor1"> with a CKEditor
+             // instance, using default configuration.
+         
+             //bootstrap WYSIHTML5 - text editor
+             $('.textarea').wysihtml5()
+         })
+         </script>
+</html>
