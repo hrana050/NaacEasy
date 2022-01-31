@@ -739,7 +739,7 @@ function canceledit() {
   </div>
 
 </div>
-<img src="../Img/naaceasy.jpeg" />
+
 
       </div>
       <div class="clr"></div>

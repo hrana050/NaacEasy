@@ -4,8 +4,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
    
     <link href="../NaacCustomFiles/css/font-awesome.min.css" rel="stylesheet" />
+
+
     <script type="text/javascript">
         $(document).ready(function () {
+            meetinglist();
+          <%--  var binduserlistrows = '';
+            $('#<%=txt_person.ClientID %>').change(function () {
+                $('#bindstaff li').remove();
+                var selectedValues = $('#<%=txt_person.ClientID %> option:selected').text();
+                binduserlistrows += "<div class='direct-chat-msg' style='margin-top: 5px;margin-bottom: 5px;'>";
+                binduserlistrows += "<img class='direct-chat-img' src='../Img/user1-128x128.jpg' alt='Message User Image' />";
+                binduserlistrows += "<span class='direct-chat-name pull-left' style='padding-left: 15px;margin-top: 10px;'>" + selectedValues + "</span> <i class='fa fa-fw fa-trash' style='color: #F24E1E;float: right;padding-top: 10px;'></i><br /></div>";
+                $('#bindstaff').append(binduserlistrows);
+            });
+          --%>
+
+            getcriteriaparentlist();
             $("#Addmeetingbtn").click(function () {
 
                 $("#meetingaddsec").show();
@@ -20,9 +35,216 @@
             $("#meetinglistdiv").show();
             $("#meetinglistsec").show();
         }
+        function getcriteriaparentlist() {
 
+            $.ajax({
+                type: "POST",
+                url: "naaceasy.aspx/criteriaparentlist",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                 
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var customers = xml.find("Table");
+                    var rows = '';
+                    $.each(customers, function () {
+                        var criterianame = $(this).find("Menuname").text();
+                        var criteriaid = $(this).find("Menuid").text();
+                        rows += "<li class='nav-item'><a class='nav-link text-truncate'  id="+ 'criteria_'+criteriaid + " onClick='criteria_select(" + criteriaid + ")' style='cursor: pointer;'><p1>" + criterianame + "</p1><img class='list_item_img' src='../img/chevron.right.svg' alt=''></a></li>";
+                    });
+                   
+                    $('#parentcriterialist').append(rows);
+                },
+                error: function (response) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                }
+            });
+
+        }
+        function getcriteriakeylist(parentid) {
+            $.ajax({
+                type: "POST",
+                url: "naaceasy.aspx/criteriakeylist",
+                data: '{id:"' + parentid + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                  
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var customers = xml.find("Table");
+                    var rows = '';
+                    $.each(customers, function () {
+                        var keyname = $(this).find("Menuname").text();
+                        var keyid = $(this).find("Menuid").text();
+                        rows += "<li class='nav-item'><a class='nav-link text-truncate'  id=" + 'criteria_' + keyid + " onClick='ki_select(" + keyid + ")' style='cursor: pointer;'><p1>" + keyname + "</p1><img class='list_item_img' src='../img/chevron.right.svg' alt=''></a></li>";
+                    });
+                    $('#crit_deselected').append(rows);
+                  
+                },
+                error: function (response) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                }
+            });
+
+        }
+        function getcriteriametricslist(criterakeyid) {
+            $.ajax({
+                type: "POST",
+                url: "naaceasy.aspx/criteriametricslist",
+                data: '{id:"' + criterakeyid + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+               
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var customers = xml.find("Table");
+                    var rows = '';
+                    $.each(customers, function () {
+                        var metricname = $(this).find("Menuname").text();
+                        var metricid = $(this).find("Menuid").text();
+                        checkbox = "<label style='font-weight:400;'><input class='checkbox' name='locationthemes' type='checkbox' value=" + metricid + ">";
+                        rows += "<li class='nav-item'><a class='nav-link text-truncate'  id=" + 'criteria_' + metricid + " onClick='metric_select(" + metricid + ")' style='cursor: pointer;'><p1>" + checkbox + metricname + "</label></p1></a></li>";
+                    });
+                    $('#ki_deselected').append(rows);
+                  
+                },
+                error: function (response) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                }
+            });
+
+        }
+        function addmeeting() {
+     
+            var todaydate = $("#today").text();
+            var selecteddate = $(".selected").text();
+            var meetingdate = "";
+            var meetingmonth = $(".head-month").text();
+            if (selecteddate == todaydate)
+            {
+                meetingdate = todaydate;
+            }
+            else if (selecteddate != todaydate)
+            {
+                meetingdate = selecteddate;
+            }
+         
+       var selecteduser = "";
+       var hiddenvalue = $("#linksnohidden").val();
+       $('#<%=txt_person.ClientID %> option:selected').each(function () {
+            selecteduser += $(this).val() + ",";
+        });
+      var checkboxValues = "";
+      $('input[name=locationthemes]:checked').map(function () {
+       checkboxValues += $(this).val() + ",";
+      });
+       
+    var id = $("#criteriaid").text();
+    var vmmeetingobj = {};
+    vmmeetingobj.meetingcriteria = checkboxValues;
+    vmmeetingobj.meetingtopic = $("#txt_topic").val();
+    vmmeetingobj.meetingdate = meetingdate
+    vmmeetingobj.contactperson = selecteduser;
+    vmmeetingobj.meetingsno = $("#meetingid").text();
+    vmmeetingobj.remark = $('iframe').contents().find('.textarea').html();
+   // vmmeetingobj.linksno = hiddenvalue;
+    var jsonData = JSON.stringify({
+        vmmeetingobj: vmmeetingobj
+    });
+    $.ajax({
+        type: "POST",
+        url: "naaceasy.aspx/addmeeting",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess,
+        error: OnErrorCall
+    });
+
+    function OnSuccess(response) {
+        var result = response.d;
+        if (result == "success") {
+            dototask(id);
+            getmeeting(id);
+            getcompetionssr(id);
+            getfaq(id);
+            dotocomtask(id);
+            $("#txt_topic").val("");
+            $("#txt_person").val("");
+            $('#<%=txt_person.ClientID %>').val("0");
+            if (hiddenvalue != "0" && hiddenvalue != "") {
+                $('#meetingsuccess').show();
+            }
+            meetinglist();
+            alert("Meeting Create Successfully..!");
+        }
+
+    }
+    function OnErrorCall(response) {
+    }
+  }
+        function meetinglist() {
+
+            $.ajax({
+                type: "POST",
+                url: "naaceasy.aspx/getmeetingtask",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var customers = xml.find("Table");
+                    var rows = '';
+                    $.each(customers, function (i, item) {
+                        var meetingname = $(this).find("meetingname").text();
+                        var username = $(this).find("name").text();
+                        var userlist = username.split(',');
+                        var j = userlist.length;
+                        var i = 0;
+                        var Menuname = $(this).find("Menuname").text();
+                        var criterialist = Menuname.split(',');
+                        var k = criterialist.length;
+                        var l = 0;
+                        var meetingid = $(this).find("meetingid").text();
+                        rows += "<div class='col-md-4'><div class='box box-primary direct-chat direct-chat-primary'><div class='box-header with-border'>";
+                        rows += "<h3 class='box-title'>" + meetingname + "</h3></div>";
+                        rows+="<div class='box-body'><div class='direct-chat-messages'><div class='direct-chat-msg'>";
+                        rows += "<div class='direct-chat-info clearfix'></div>";
+                        for (i = 0; i < j; i++) {
+                            rows += "<img class='direct-chat-img' src='../Img/user1-128x128.jpg' alt=" + userlist[i] + " title=" + userlist[i] + " />";
+                        }
+                        rows+= "</div>";
+                        rows+= "<div class='direct-chat-msg'>";
+                        rows+="<div class='direct-chat-info clearfix' style='padding-top:15px;padding-bottom:15px;font-size:16px;'>";
+                        rows += "<span class='direct-chat-name pull-left'>METRICS</span><br />";
+                        for (l = 0; l < k; l++) {
+                            rows += "<span class='btn btn-info pull-left' style='border-radius:10px;margin-right: 5px;'>" + criterialist[l]+ "</span>&nbsp;&nbsp;";
+                        }
+                         rows+=  "<br />";
+                        rows+= "</div><p> <span class='direct-chat-timestamp pull-left'><i class='fa fa-clock-o'></i> 23 Jan 2022 2:05 pm</span></p></div>";
+                        rows+="<a  style='float:right;color: #2A85FF;' class='btn'>Details <i class='fa fa-fw fa-arrow-right'></i></a></div></div> </div> </div>";
+                    });
+                   
+                    $('#meetingnotelist').append(rows);
+                    
+
+                },
+                error: function (response) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                }
+            });
+
+        }
     </script>
-    <script>
+
+ <script>
         document.addEventListener('DOMContentLoaded', function () {
             var today = new Date(),
                 year = today.getFullYear(),
@@ -369,7 +591,7 @@ tbody td:active {
       <div class="callout callout-info" id="meetinglistdiv">
 
         <h4>Meeting Notes</h4>
-              <span style="margin-top: -30px;float:right;padding-right: 30px;"><button type="button" class="btn btn-primary pull-right" id="Addmeetingbtn"> <img src="../Img/pluse.svg" /> Add New Note</button></span>
+              <span style="margin-top: -30px;float:right;padding-right: 30px;"><button type="button" class="btn btn-primary pull-right" id="Addmeetingbtn"> <i class="fa fa-fw fa-plus"></i> Add New Note</button></span>
         <p style="font-size: 14px;color: #5697fd;">Create and manage notes to streamline workflow</p>
       </div>
 
@@ -378,7 +600,7 @@ tbody td:active {
         <h4>
             <a id="showmeetingadddiv" style="color:#000; cursor:pointer" onclick="opendiv();"><i class="fa fa-fw fa-arrow-left"></i></a> Add New Note</h4>
               <span style="margin-top: -40px;float:right;padding-right: 30px;">
-                    <button type="button" class="btn btn-success pull-right" style="float:right ; margin-top:15PX;margin-left: 15px;" id="savemeetingbtn"><i class="fa fa-fw fa-check"></i> Save</button>
+                    <button type="button" class="btn btn-success pull-right" style="float:right ; margin-top:15PX;margin-left: 15px;" id="savemeetingbtn" onClick="addmeeting()"><i class="fa fa-fw fa-check"></i> Save</button>
 
                    <button type="button" class="btn btn-warning pull-right" style="float:right ; margin-top:15PX; margin-left:15px;" id="cancelbtn"><i class="fa fa-fw fa-trash"></i> Delete</button>
 
@@ -581,162 +803,8 @@ tbody td:active {
          </div>
         </section>
     <section class="content" id="meetinglistsec" style="display:none">
-     <div class="row">
-        <div class="col-md-4">
-          <!-- DIRECT CHAT PRIMARY -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Meeting notes for january 2022</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                 
-               
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                      <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                  <!-- /.direct-chat-text -->
-                </div>
-                   <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix" style="padding-top:15px;padding-bottom:15px;font-size:16px;">
-                    <span class="direct-chat-name pull-left">METRICS</span><br />
-                    <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.1</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.2</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;">1.2.3</span><br />
-                     
-                   
-                  </div>
-                    <p> <span class="direct-chat-timestamp pull-left"><i class="fa fa-clock-o"></i> 23 Jan 2022 2:05 pm</span></p>
-                  <!-- /.direct-chat-info -->
-                
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-              <a  style="float:right;color: #2A85FF;" class="btn">Details <i class="fa fa-fw fa-arrow-right"></i></a>
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-            </div>
-            <!-- /.box-body -->
-        
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-
-          <div class="col-md-4">
-          <!-- DIRECT CHAT PRIMARY -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Monthly Meeting</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                 
-               
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                      <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                  <!-- /.direct-chat-text -->
-                </div>
-                   <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix" style="padding-top:15px;padding-bottom:15px;font-size:16px;">
-                    <span class="direct-chat-name pull-left">METRICS</span><br />
-                    <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.1</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.2</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;">1.2.3</span><br />
-                     
-                   
-                  </div>
-                    <p> <span class="direct-chat-timestamp pull-left"><i class="fa fa-clock-o"></i> 23 Jan 2022 2:05 pm</span></p>
-                  <!-- /.direct-chat-info -->
-                
-                  <!-- /.direct-chat-text -->
-                </div>
-                     <a  style="float:right;color: #2A85FF;" class="btn">Details <i class="fa fa-fw fa-arrow-right"></i></a>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-              
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-            </div>
-            <!-- /.box-body -->
-       
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-
-            <div class="col-md-4">
-          <!-- DIRECT CHAT PRIMARY -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Testing Meeting</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
-                
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                      <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" />
-                     <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" />
-                  <!-- /.direct-chat-text -->
-                </div>
-                   <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix" style="padding-top:15px;padding-bottom:15px;font-size:16px;">
-                    <span class="direct-chat-name pull-left">METRICS</span><br />
-                    <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.1</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;margin-right: 5px;">1.2.2</span>&nbsp;&nbsp;
-                       <span class="btn btn-info pull-left" style="border-radius:10px;">1.2.3</span><br />
-                     
-                   
-                  </div>
-                    <p> <span class="direct-chat-timestamp pull-left"><i class="fa fa-clock-o"></i> 23 Jan 2022 2:05 pm</span></p>
-                  <!-- /.direct-chat-info -->
-                
-                  <!-- /.direct-chat-text -->
-                </div>
-                     <a  style="float:right;color: #2A85FF;" class="btn">Details <i class="fa fa-fw fa-arrow-right"></i></a>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-              
-                <!-- /.direct-chat-msg -->
-              </div>
-              <!--/.direct-chat-messages-->
-            </div>
-            <!-- /.box-body -->
-    
-            <!-- /.box-footer-->
-          </div>
-          <!--/.direct-chat -->
-        </div>
-        <!-- /.col -->
+     <div class="row" id="meetingnotelist">
+     
 </div>
         </section>
     <section class="content" id="meetingaddsec" style="display:none">
@@ -775,7 +843,7 @@ tbody td:active {
                   <div class="col-md-12">
                        <div class="form-group">
                 <label>Title</label> <i class="fa fa-exclamation-circle" aria-hidden="true" style="color:#8A939F"></i>
-                  <input type="text" class="form-control" id="title" placeholder="Enter metrics title..!" />
+                  <input type="text" class="form-control" id="txt_topic" placeholder="Enter metrics title..!" />
                 </div>
              
                   </div>
@@ -901,34 +969,24 @@ tbody td:active {
         </button></h5>
     
               <div class="form-group">
-                  <select class="form-control select2" multiple="multiple" style="width: 100%;" data-placeholder="Select Staff">
-                  <option>Hemant</option>
-                  <option>Rahul</option>
-                  <option>Sumit</option>
-                  <option>Kiran</option>
-                </select>
+                      <asp:DropDownList ID="txt_person" runat="server" class="form-control select2" multiple="multiple" style="width: 100%;" data-placeholder="Select Staff"></asp:DropDownList>&nbsp;
+                 
               </div>
             <div class="form-group">
                 <label>Currently Added</label> <i class="fa fa-exclamation-circle" aria-hidden="true" style="color:#8A939F"></i>
-                     <div class="direct-chat-msg" style="margin-top: 5px;margin-bottom: 5px;">
+                <div id="bindstaff">
+                   <%--  <div class="direct-chat-msg" style="margin-top: 5px;margin-bottom: 5px;">
                   <!-- /.direct-chat-info -->
                   <img class="direct-chat-img" src="../Img/user1-128x128.jpg" alt="Message User Image" /> <span class="direct-chat-name pull-left" style="padding-left: 15px;margin-top: 10px;">Hemant Singh</span> <i class="fa fa-fw fa-trash" style="color: #F24E1E;float: right;padding-top: 10px;"></i><br />
 
                          <!-- /.direct-chat-text -->
-                </div>
-                  <div class="direct-chat-msg" style="margin-top: 5px;margin-bottom: 5px;">
-                                           <img class="direct-chat-img" src="../Img/user2-160x160.jpg" alt="Message User Image" /> <span class="direct-chat-name pull-left" style="padding-left: 15px;margin-top: 10px;">Aman Prakash</span> <i class="fa fa-fw fa-trash" style="color: #F24E1E;float: right;padding-top: 10px;"></i><br />
-
-                         </div>
-                 <div class="direct-chat-msg" style="margin-top: 5px;margin-bottom: 5px;">
-                  <img class="direct-chat-img" src="../Img/user3-128x128.jpg" alt="Message User Image" /> <span class="direct-chat-name pull-left" style="padding-left: 15px;margin-top: 10px;">Anju</span> <i class="fa fa-fw fa-trash" style="color: #F24E1E;float: right;padding-top: 10px;"></i>
-
-                         </div>
+                </div>--%>
+                    </div>
                 </div>
               <!-- /.form-group -->
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
       </div>
     </div>
   </div>
@@ -945,7 +1003,12 @@ tbody td:active {
 }
 </style>
     <style>
-
+.checkbox, .radio {
+    position: relative;
+    display: inherit;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -997,6 +1060,9 @@ tbody td:active {
   justify-content: space-between;
   align-items: center;
 }
+p1{
+    font-size: 16px;
+}
 
 hr{
   border: 1px solid #DBDBDB;
@@ -1019,6 +1085,15 @@ hr{
   margin-left:8px;
   overflow-y:auto;
 }
+#parentcriterialist.nav > li > a {
+    position: relative;
+    display: inherit;
+    padding: 10px 15px;
+}
+ .nav > li {
+    position: relative;
+     display: inherit;
+}
 
 .dropdown_item{
   display:flex;
@@ -1029,7 +1104,7 @@ hr{
   padding:8px 12px;
   margin-bottom:8px;
   color: #1A1A1A;
-  font-size:20px;
+  font-size:16px;
   line-height:28px;
   font-weight:400;
   border-radius: 8px;
@@ -1040,28 +1115,22 @@ hr{
   margin-bottom:0;
 }
 
-#crit_deselected{
-  display:none !important;
-}
 
-#ki_deselected{
-  display:none !important;
-}
-
-#item_deselected>.list_item_img{
+.item_deselected>.list_item_img{
   opacity:0;
 }
 
-#item_selected>.list_item_img{
+.item_selected>.list_item_img{
   opacity:100%;
   filter: invert(47%) sepia(31%) saturate(7499%) hue-rotate(201deg) brightness(102%) contrast(102%);
 }
 
-#item_selected{
+.item_selected{
   background: #EAF3FF;
   box-shadow: inset 0px -3px 9px rgba(4, 13, 25, 0.06);
   font-weight:500;
   color:#2A85FF;
+  border-radius:10px;
 }
 
     </style>
@@ -1083,60 +1152,17 @@ hr{
     </div>
     <hr class="dropdown_hr">
     <div class="dropdown_selection_table">
-      <div class="criteria_selection" id="criteria">
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 1</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 2</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 3</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 4</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 5</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item crit_btn " id="item_deselected" onClick="criteria_select()">
-          <p1>Criteria 6</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-      </div>
-      <div class="criteria_selection ki_list" id="crit_deselected">
-        <div class="dropdown_item ki_btn" id="item_deselected" onClick="ki_select()">
-          <p1>K. I. 1.1</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item ki_btn" id="item_deselected" onClick="ki_select()">
-          <p1>K. I. 1.2</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item  ki_btn" id="item_deselected" onClick="ki_select()">
-          <p1>K. I. 1.3</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-        <div class="dropdown_item ki_btn" id="item_deselected" onClick="ki_select()">
-          <p1>K. I. 1.4</p1>
-          <img class="list_item_img" src="../img/chevron.right.svg" alt="">
-        </div>
-      </div>
-      <div class="criteria_selection metric_list" id="ki_deselected">
-        <div class="dropdown_item metric_btn" id="item_deselected" onClick="metric_select()">
-          <p1>Metric 1.2.1</p1>
-          <img class="list_item_img" src="../img/checkmark.shield.svg" alt="">
-        </div>
-        <div class="dropdown_item metric_btn" id="item_deselected" onClick="metric_select()">
-          <p1>Metric 1.2.2</p1>
-          <img class="list_item_img" src="../img/checkmark.shield.svg" alt="">
-        </div>
-      </div>
+          <input type="hidden" id="hidecriteria" name="hidecriteria" />
+             <input type="hidden" id="hidekey" name="hidekey" />
+      <ul class="nav flex-column flex-nowrap criteria_selection" id="parentcriterialist"> 
+                
+      </ul>
+      <ul class="nav flex-column flex-nowrap criteria_selection" id="crit_deselected">
+        
+      </ul>
+      <ul class="nav flex-column flex-nowrap criteria_selection metric_list" id="ki_deselected">
+      
+      </ul>
     </div>
   </div>
 
@@ -1161,21 +1187,12 @@ hr{
               <!-- /.form-group -->
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
       </div>
     </div>
   </div>
 </div>
     
-<script>
-    $(document).ready(function () {
-        $('.dropdown-submenu a.test').on("click", function (e) {
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-    });
-</script>
     <script type="text/javascript">
 
         var hr = document.getElementsByClassName("dropdown_hr")[0];
@@ -1183,12 +1200,11 @@ hr{
         var dropdown = document.getElementsByClassName("metricdropdiv")[0];
         var title = document.getElementsByClassName("title_icon")[0];
         var title_img = document.getElementsByClassName("title_img")[0];
-        var criteria_btn = document.getElementsByClassName("crit_btn")[0];
+       // var criteria_btn = document.getElementsByClassName("crit_btn")[0]
         var ki_list = document.getElementsByClassName("ki_list")[0];
         var ki_btn = document.getElementsByClassName("ki_btn")[0];
         var metric_list = document.getElementsByClassName("metric_list")[0];
         var metric_btn = document.getElementsByClassName("metric_btn")[0];
-
         function show_hide() {
             if (dropdown.style.height != "auto") {
                 hr.style.border = "none";
@@ -1211,18 +1227,44 @@ hr{
             }
         }
 
-        function criteria_select() {
-            criteria_btn.id = "item_selected";
-            ki_list.id = "crit_selected";
+        function criteria_select(parentid) {
+            $("#hidecriteria").val(parentid);
+            $('#crit_deselected li').remove();
+            $('#ki_deselected li').remove();
+            $("#criteria_" + parentid).addClass("item_selected");
+            var lastdiv = localStorage.getItem("ocriteriapendiv");
+            if (lastdiv == null) {
+               
+            }
+            else {
+
+                $("#criteria_" + lastdiv).removeClass("item_selected");
+                localStorage.clear();
+            }
+            localStorage.setItem("ocriteriapendiv", $('#hidecriteria').val());
+            getcriteriakeylist(parentid);
         }
 
-        function ki_select() {
-            ki_btn.id = "item_selected";
-            metric_list.id = "ki_selected";
+        function ki_select(criterakeyid) {
+            $("#hidekey").val(criterakeyid);
+            $('#ki_deselected li').remove();
+            $("#criteria_" + criterakeyid).addClass("item_selected");
+            var lastdiv = localStorage.getItem("keypendiv");
+            if (lastdiv == null) {
+
+            }
+            else {
+
+                $("#criteria_" + lastdiv).removeClass("item_selected");
+                localStorage.clear();
+            }
+            localStorage.setItem("keypendiv", $('#hidekey').val());
+            getcriteriametricslist(criterakeyid);
+           
         }
 
         function metric_select() {
-            metric_btn.id = "item_selected";
+           
         }
 
       </script>
