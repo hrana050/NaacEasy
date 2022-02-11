@@ -9,8 +9,8 @@
 });
 
 function visibledashboard() {
-
-    
+    $("#addtododiv").hide();
+    $("#todoaddsec").hide();
     $("#Dashboardtab").show();
     $("#meetingtoptitlediv").hide();
     $("#meetinglistdiv").hide();
@@ -35,6 +35,9 @@ function visibledashboard() {
 
 }
 function visiblemeetingtab() {
+    
+    $("#todoaddsec").hide();
+    $("#addtododiv").hide();
     $("#meetingtoptitlediv").show();
     $("#meetinglistdiv").show();
     $("#meetinglistsec").show();
@@ -78,6 +81,8 @@ function visiblemeetingtab() {
     //$('#contenttab').show();
 }
 function visibletodotab() {
+    $("#addtododiv").hide();
+    $("#todoaddsec").hide();
     $("#meetingtoptitlediv").hide();
     $("#meetinglistdiv").hide();
     $("#meetinglistsec").hide();
@@ -492,7 +497,7 @@ $(document).ready(function () {
                 $('#' + lastdiv + '_div').show();
             }
             localStorage.clear();
-            buildmenu_demo($('#menudemo'), data);
+           buildmenu_demo($('#menudemo'), data);
         }
 
     });
@@ -712,10 +717,10 @@ function getPath(a) {
 
     return path;
 }
-$(document).on('click', '#menudemo a', function () {
-    $("#criteriapath").text(getPath(this));
-    event.preventDefault();
-});
+//$(document).on('click', '#menudemo a', function () {
+//    $("#criteriapath").text(getPath(this));
+//    event.preventDefault();
+//});
 
 
 $(document).ready(function () {

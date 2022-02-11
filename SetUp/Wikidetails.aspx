@@ -7,7 +7,7 @@
             $(document).ready(function () {
                 var baseUrl = (window.location).href; // You can also use document.URL
                 var koopId = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
-                if (koopId != "http://localhost:62168/SetUp/Wikidetails.aspx") {
+                if (koopId != "http://naaceasy.com/SetUp/Wikidetails.aspx") {
                     getwiki(koopId);
                     $("#btn_save").val('Update');
                 }
@@ -27,6 +27,9 @@
                     Details.qnt = $('#<%=txt_qnt.ClientID%>').val();
                     Details.details = $("#summernote").val();
                     Details.sop = $("#sopsummernote").val();
+                    Details.filedescription = $("#filedesc").val();
+                    Details.datarequirement = $("#datarequirement").val();
+                    Details.additionaldetails = $("#additionaldetails").val();
                     Details.guidelines = $("#guidelines").val();
                     Details.user = user;
                     Details.status = $('#<%=ddl_status.ClientID %> option:selected').val();
@@ -92,6 +95,10 @@
                             //alert(summertext);
                             var sopdetails = $(this).find("sopdetails").text();
                             $("#sopsummernote").summernote("code", sopdetails);
+                            $("#filedesc").summernote("code", $(this).find("filedescription").text());
+                            $("#datarequirement").summernote("code", $(this).find("datarequirement").text());
+                            $("#additionaldetails").summernote("code", $(this).find("additiondetails").text());
+                           
                             //$("#sopsummernote").val($(this).find("sopdetails").text());
                             var krmuguide = $(this).find("krmuguide").text();
                             $("#guidelines").summernote("code", krmuguide);
@@ -191,10 +198,34 @@
                                 </div>
                            </div>
                     <div class="row" style="padding-top:15px;">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                   <label for="inputName">Naac Details</label>
                       
                             <textarea id="summernote" style="height:100px;">
+             
+              </textarea>
+                   
+                        </div>
+                         <div class="col-md-6">
+                  <label for="inputName">File Description</label>
+                      
+                            <textarea id="filedesc" style="height:100px;">
+             
+              </textarea>
+                   
+                        </div>
+                          <div class="col-md-6">
+                  <label for="inputName">Data Requirement</label>
+                      
+                            <textarea id="datarequirement" style="height:100px;">
+             
+              </textarea>
+                   
+                        </div>
+                        <div class="col-md-6">
+                  <label for="inputName">Additional Details</label>
+                      
+                            <textarea id="additionaldetails" style="height:100px;">
              
               </textarea>
                    
@@ -265,6 +296,18 @@
 
         });
         $('#sopsummernote').summernote({
+            height: 300,                 // set editor height
+
+        });
+        $('#filedesc').summernote({
+            height: 300,                 // set editor height
+
+        });
+        $('#datarequirement').summernote({
+            height: 300,                 // set editor height
+
+        });
+        $('#additionaldetails').summernote({
             height: 300,                 // set editor height
 
         });

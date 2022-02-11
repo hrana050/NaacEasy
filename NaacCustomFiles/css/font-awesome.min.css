@@ -3,16 +3,54 @@
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 
+
 @font-face {
-    font-family: "FontAwesome";
-    src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
-    src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), 
-        url("../fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), 
-        url("../fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"),
-        url("../fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"),
-         url("../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
-    font-weight: normal;
-    font-style: normal;
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Black.woff") format("woff");
+    font-weight:400;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Bold.woff") format("woff");
+    font-weight:800;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Heavy.woff") format("woff");
+    font-weight:900;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Medium.woff") format("woff");
+    font-weight:500;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Regular.woff") format("woff");
+    font-weight:400;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Semibold.woff") format("woff");
+    font-weight:600;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Thin.woff") format("woff");
+    font-weight:300;
+      
+}
+@font-face {
+     font-family: "SF Pro Rounded";
+    src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Ultralight.woff") format("woff");
+    font-weight:200;
+      
 }
 .fa {
     display: inline-block;

@@ -29,7 +29,7 @@
             <div class="card">
               <div class="card-header" style="background-color: #ffffff;">
                 <div class="card-body">
-         <asp:GridView ID="grdrecord" runat="server" AutoGenerateColumns="false" OnRowCommand="grdrecord_RowCommand" AllowPaging="true" PageSize="1000" Width="100%" class="table table-bordered table-striped">
+         <asp:GridView ID="grdrecord" runat="server" AutoGenerateColumns="false" OnRowCommand="grdrecord_RowCommand" AllowPaging="true" PageSize="2000" Width="100%" class="table table-bordered table-striped">
                           
                             <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                             <HeaderStyle BackColor="#ffffff" Font-Bold="True" ForeColor="Black" />

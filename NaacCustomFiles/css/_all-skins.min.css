@@ -1,4 +1,6 @@
-﻿.skin-blue .main-header .navbar {
+﻿/*menu code start here by Hemant*/
+
+.skin-blue .main-header .navbar {
     background-color: #fdfdfd;
 }
 .skin-blue .main-header .navbar .nav > li > a {
@@ -40,6 +42,7 @@
     }
 }
 .skin-blue .main-header .logo {
+    height: 64px;
       background-color: #fdfdfd;
     color: #2A85FF;
     /*font-weight:600;*/
@@ -64,16 +67,7 @@
 .skin-blue .user-panel > .info > a {
     color: #fff;
 }
-.skin-blue .sidebar-menu > li.header {
-    color: #2e84fd;
-    background: #fdfdfd;
-    font-size: 18px;
-    font-weight:600;
-}
-.skin-blue .sidebar-menu > li > a {
-    border-left: 3px solid transparent;
-    font-size: 14px;
-}
+
 .skin-blue .sidebar-menu > li:hover > a,
 .skin-blue .sidebar-menu > li.active > a,
 .skin-blue .sidebar-menu > li.menu-open > a {
@@ -89,9 +83,7 @@
     margin: 0 1px;
     background: #fdfdfd;
 }
-.skin-blue .sidebar a {
-    color:  rgb(4 13 25);
-}
+
 .skin-blue .sidebar a:hover {
     text-decoration: none;
 }

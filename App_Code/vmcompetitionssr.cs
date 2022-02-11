@@ -17,4 +17,5 @@ public class vmcompetitionssr
     public string compssrdetails { get; set; }
     public int status { get; set; }
     public string type { get; set; }
+    public string fileuploddetails { get; set; }
 }

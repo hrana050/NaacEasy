@@ -33,6 +33,7 @@ public partial class Home_naaceasy : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         binduser();
+        bindmenu();
     }
     public void binduser()
     {
@@ -48,12 +49,39 @@ public partial class Home_naaceasy : System.Web.UI.Page
             DataTable dt = new DataTable();
             da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-            txt_person.DataSource = dt;
-            txt_person.DataTextField = "name";
-            txt_person.DataValueField = "loginid";
-            txt_person.DataBind();
-            txt_person.Items.Insert(0, new ListItem("Select User", "0"));
+            ddl_todostaff.DataSource = dt;
+            ddl_todostaff.DataTextField = "name";
+            ddl_todostaff.DataValueField = "loginid";
+            ddl_todostaff.DataBind();
 
+            ddl_todostaff.Items.Insert(0, new ListItem("Select User", "0"));
+
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, this.GetType(), "validate", "javascript: alert('" + ex.Message + "');", true);
+        }
+    }
+    public void bindmenu()
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(constr);
+            cmd = new SqlCommand("ManageMenu", con);
+            cmd.Parameters.AddWithValue("@User", null);
+            cmd.Parameters.AddWithValue("@Type", "GetRecords_status");
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            DataTable dt = new DataTable();
+            da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            ddl_todometric.DataSource = dt;
+            ddl_todometric.DataTextField = "Menuname";
+            ddl_todometric.DataValueField = "Menuid";
+            ddl_todometric.DataBind();
+            ddl_todometric.Items.Insert(0, new ListItem("Select Criteria", "0"));
+       
             con.Close();
         }
         catch (Exception ex)
@@ -134,16 +162,12 @@ public partial class Home_naaceasy : System.Web.UI.Page
        {
            try
            {
-               //if (vmmeetingobj.linksno == "0" || vmmeetingobj.linksno == "")
-               //{
+             
                    string uservalue = vmmeetingobj.contactperson;
-                   string[] userlist = uservalue.Trim().Split(',');
+                   string prestaff = vmmeetingobj.previousstaff;
+                   string premetric = vmmeetingobj.previousmetric;
+                   string yourString = premetric.Replace(" ", ",");
                    string criteriavalue = vmmeetingobj.meetingcriteria;
-                   string[] criterialist = criteriavalue.Trim().Split(',');
-                   int j = userlist.Length;
-                   int i = 0;
-                   int k = criterialist.Length;
-                   int l = 0;
                    string constr = "";
                    SqlCommand cmd;
                    constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
@@ -152,75 +176,46 @@ public partial class Home_naaceasy : System.Web.UI.Page
                    cmd.CommandType = CommandType.StoredProcedure;
                    cmd.Connection = con;
                    cmd.Parameters.AddWithValue("@meetingname", vmmeetingobj.meetingtopic);
+                
                    cmd.Parameters.AddWithValue("@meetingdate", vmmeetingobj.meetingdate);
                    cmd.Parameters.AddWithValue("@meetingtime", vmmeetingobj.meetingtime);
+                   cmd.Parameters.AddWithValue("@description", vmmeetingobj.remark);
+               
                    if (vmmeetingobj.meetingsno != "")
                    {
-                       cmd.Parameters.AddWithValue("@linksno", vmmeetingobj.meetingsno);
+                       if (uservalue == "")
+                       {
+                           cmd.Parameters.AddWithValue("@contactperson", prestaff + ",");
+                       }
+                       else{
+                             cmd.Parameters.AddWithValue("@contactperson", uservalue);
+                       }
+                       if (criteriavalue == "")
+                       {
+                           cmd.Parameters.AddWithValue("@criteriaid", premetric);
+                       }
+                       else
+                       {
+                           cmd.Parameters.AddWithValue("@criteriaid", criteriavalue);
+                       }
+                       cmd.Parameters.AddWithValue("@meetingid", vmmeetingobj.meetingsno);
                        cmd.Parameters.AddWithValue("@type", "update");
                    }
                    else
                    {
+                       cmd.Parameters.AddWithValue("@contactperson", uservalue);
+                       cmd.Parameters.AddWithValue("@criteriaid", criteriavalue);
                        cmd.Parameters.AddWithValue("@type", "insert");
                    }
                    con.Open();
-                   cmd.ExecuteNonQuery();
+                  cmd.ExecuteNonQuery();
                    SqlCommand cmd_1 = new SqlCommand("getmeetingid", con);
                    cmd_1.CommandType = CommandType.StoredProcedure;
                    DataTable dt = new DataTable();
                    SqlDataAdapter da = new SqlDataAdapter(cmd_1);
                    da.Fill(dt);
                    con.Close();
-                   string meetingid = dt.Rows[0]["meetingid"].ToString();
-                   for (i = 0; i < j; i++)
-                   {
-                       string userid = userlist[i];
-                       if (userid != "")
-                       {
-                           for (l = 0; l < k; l++)
-                           {
-                               string criteriaid = criterialist[l];
-                               if (criteriaid != "")
-                               {
-                                   string connectionstring = "";
-                                   SqlCommand cmdd;
-                                   connectionstring = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
-                                   SqlConnection conn = new SqlConnection(connectionstring);
-                                   cmdd = new SqlCommand("ManageMeetinglinkuser", conn);
-                                   cmdd.CommandType = CommandType.StoredProcedure;
-                                   cmdd.Connection = conn;
-                                   cmdd.Parameters.AddWithValue("@meetingid", meetingid);
-                                   cmdd.Parameters.AddWithValue("@userid", userid);
-                                   cmdd.Parameters.AddWithValue("@criteriaid", criteriaid);
-                                   cmdd.Parameters.AddWithValue("@type", "insert");
-                                   conn.Open();
-                                   cmdd.ExecuteNonQuery();
-                                   conn.Close();
-                               }
-                           }
-                       }
-                   }
-
-                   con.Close();
-               //}
-               //else
-               //{
-               //    string constr = "";
-               //    SqlCommand cmd;
-               //    constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
-               //    SqlConnection con = new SqlConnection(constr);
-               //    cmd = new SqlCommand("ManageMeetinglinkuser", con);
-               //    cmd.CommandType = CommandType.StoredProcedure;
-               //    cmd.Connection = con;
-               //    cmd.Parameters.AddWithValue("@sno", vmmeetingobj.linksno);
-               //    cmd.Parameters.AddWithValue("@userid", vmmeetingobj.contactperson);
-               //    cmd.Parameters.AddWithValue("@meetingid", vmmeetingobj.meetingsno);
-               //    cmd.Parameters.AddWithValue("@criteriaid", vmmeetingobj.meetingcriteria);
-               //    cmd.Parameters.AddWithValue("@remark", vmmeetingobj.remark);
-               //    cmd.Parameters.AddWithValue("@type", "update");
-               //    con.Open();
-               //    cmd.ExecuteNonQuery();
-               //}
+                
                return "success";
            }
            catch (Exception ac)
@@ -230,7 +225,7 @@ public partial class Home_naaceasy : System.Web.UI.Page
        }
 
        [WebMethod]
-       public static string getmeetingtask()
+       public static string getmeetingtask(string id,string type)
        {
            string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
            using (SqlConnection con = new SqlConnection(constr))
@@ -238,8 +233,68 @@ public partial class Home_naaceasy : System.Web.UI.Page
                using (SqlCommand cmd = new SqlCommand("insertmeeting", con))
                {
                    cmd.CommandType = CommandType.StoredProcedure;
-                   cmd.Parameters.AddWithValue("@type", "meetingnoteslist");
-               //    cmd.Parameters.AddWithValue("@criteriaid", id);
+                   cmd.Parameters.AddWithValue("@type", type);
+                   cmd.Parameters.AddWithValue("@meetingid", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+       [WebMethod]
+       public static string addtodo(vmtodo vmtodoobj)
+       {
+           try
+           {
+               string constr = "";
+               SqlCommand cmd;
+               constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+               SqlConnection con = new SqlConnection(constr);
+               cmd = new SqlCommand("inserttodo", con);
+               cmd.CommandType = CommandType.StoredProcedure;
+               cmd.Connection = con;
+               cmd.Parameters.AddWithValue("@criteriaid", vmtodoobj.criteriaid);
+               cmd.Parameters.AddWithValue("@taskname", vmtodoobj.taskname);
+               cmd.Parameters.AddWithValue("@assignto", vmtodoobj.assignto);
+               cmd.Parameters.AddWithValue("@assigndate", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+               cmd.Parameters.AddWithValue("@enddate", vmtodoobj.enddtae);
+               cmd.Parameters.AddWithValue("@taskstatus", "0");
+               cmd.Parameters.AddWithValue("@todoremark", vmtodoobj.remark);
+               //if (vmtodoobj.sno != "")
+               //{
+               //    cmd.Parameters.AddWithValue("@sno", vmtodoobj.sno);
+               //    cmd.Parameters.AddWithValue("@type", "Edit");
+               //}
+               //else
+               //{
+                   cmd.Parameters.AddWithValue("@type", "insert");
+               //}
+
+               con.Open();
+               cmd.ExecuteNonQuery();
+               con.Close();
+               return "success";
+           }
+           catch (Exception ac)
+           {
+               return "Error";
+           }
+       }
+       [WebMethod]
+       public static string gettodotask()
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("inserttodo", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@type", "select");
                    cmd.Connection = con;
                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                    {
@@ -252,4 +307,138 @@ public partial class Home_naaceasy : System.Web.UI.Page
 
        }
 
+       [WebMethod]
+       public static string getmetriclist(string id)
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("getmetriclist", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@keysno", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+       [WebMethod]
+       public static string getmetricdetails(string id)
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("getmetricdetails", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@keysno", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+       [WebMethod]
+
+       public static string getcompssr(string id)
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("managecompssr", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@type", "select");
+                   cmd.Parameters.AddWithValue("@criteria", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+     [WebMethod]
+       public static string getssrdetails(string id)
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("managecompssr", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@type", "getRecords");
+                   cmd.Parameters.AddWithValue("@sno", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+     [WebMethod]
+     public static string getprofile(string id)
+     {
+         string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+         using (SqlConnection con = new SqlConnection(constr))
+         {
+             using (SqlCommand cmd = new SqlCommand("managecompssr", con))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Parameters.AddWithValue("@type", "GetRecords");
+                 cmd.Parameters.AddWithValue("@userid", id);
+                 cmd.Connection = con;
+                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                 {
+                     DataSet ds = new DataSet();
+                     sda.Fill(ds);
+                     return ds.GetXml();
+                 }
+             }
+         }
+
+     }
+     [WebMethod]
+     public static string getstafflist()
+     {
+
+         string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+         using (SqlConnection con = new SqlConnection(constr))
+         {
+             using (SqlCommand cmd = new SqlCommand("Manageusers", con))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Connection = con;
+                 cmd.Parameters.AddWithValue("@username", null);
+                 cmd.Parameters.AddWithValue("@User", null);
+                 cmd.Parameters.AddWithValue("@Type", "GetRecords");
+                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                 {
+                     DataSet ds = new DataSet();
+                     sda.Fill(ds);
+                     return ds.GetXml();
+                 }
+             }
+         }
+
+     }
+ 
 }

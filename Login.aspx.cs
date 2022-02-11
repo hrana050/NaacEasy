@@ -82,8 +82,8 @@ public partial class Login : System.Web.UI.Page
             dt = CheckUser(txt_loginName.Text.Trim(), txt_loginpwd.Text.Trim());
             if (dt.Rows.Count > 0)
             {
-                Session["Username"] = dt.Rows[0]["Username"].ToString();
-                hash.Add("Name", dt.Rows[0]["Username"].ToString());
+                Session["Username"] = dt.Rows[0]["name"].ToString();
+                hash.Add("Name", dt.Rows[0]["name"].ToString());
                 Session["User"] = hash;
                 Session["sessionname"] = dt.Rows[0]["name"].ToString();
                 Session["LoginID"] = dt.Rows[0]["LoginID"].ToString();

@@ -24,4 +24,7 @@ public class wikidetails
     public string sop { get; set; }
     public string guidelines { get; set; }
     public string benchmark { get; set; }
+    public string filedescription { get; set; }
+    public string datarequirement { get; set; }
+    public string additionaldetails { get; set; }
 }

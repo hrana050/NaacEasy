@@ -21,4 +21,6 @@ public class vmmeeting
     public string remark { get; set; }
     public string meetingdate { get; set; }
     public string meetingtime { get; set; }
+    public string previousstaff { get; set; }
+    public string previousmetric { get; set; }
 }

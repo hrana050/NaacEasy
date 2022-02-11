@@ -119,6 +119,8 @@ public partial class SetUp_AddUser : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@name", txt_empname.Text);
 
             cmd.Parameters.AddWithValue("@password", txt_pwd.Text);
+            cmd.Parameters.AddWithValue("@bio", txt_bio.Text);
+            cmd.Parameters.AddWithValue("@designation", txt_desi.Text);
             cmd.Parameters.AddWithValue("@emailid", txt_emaild.Text);
             cmd.Parameters.AddWithValue("@contactno", txt_contact.Text);
             cmd.Parameters.AddWithValue("@u_role", ddl_usertype.SelectedValue);
@@ -138,6 +140,7 @@ public partial class SetUp_AddUser : System.Web.UI.Page
             con.Open();
 
             int HasRow = (int)cmd.ExecuteScalar();
+            updateprofile(HasRow);
             con.Close();
             if (HasRow == 1)
             {
@@ -162,6 +165,39 @@ public partial class SetUp_AddUser : System.Web.UI.Page
         }
     }
 
+    public void updateprofile(int id)
+    {
+        string strFileName;
+        if (FileUpload1.HasFile)
+        {
+            string OriginalfileName = Convert.ToString(FileUpload1.FileName);
+            string strFileType = System.IO.Path.GetExtension(OriginalfileName).ToString().ToLower();
+            strFileName = (id + strFileType);
+            FileUpload1.SaveAs(Server.MapPath(("~/profileimage/" + (strFileName))));
+            hash = new Hashtable();
+            hash = (Hashtable)Session["User"];
+            SqlConnection con = new SqlConnection(constr);
+            cmd = new SqlCommand("Manageusers", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@profileimage", strFileName);
+            cmd.Parameters.AddWithValue("@userid", id);
+            cmd.Parameters.AddWithValue("@Type", "updatepic");
+            con.Open();
+            cmd.ExecuteNonQuery();
+            Clear();
+        }
+        else
+        {
+            if (btn_save.Text == "Save")
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, this.GetType(), "validate", "javascript: alert('PLease select file...');", true);
+            }
+            else
+            {
+
+            }
+        }
+    }
     protected void grdrecord_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         try
@@ -182,6 +218,8 @@ public partial class SetUp_AddUser : System.Web.UI.Page
                 txt_empname.Text = dt.Rows[0]["name"].ToString();
                 txt_pwd.Text = dt.Rows[0]["Password"].ToString();
                 txt_emaild.Text = dt.Rows[0]["emailid"].ToString();
+                txt_desi.Text = dt.Rows[0]["designation"].ToString();
+                txt_bio.Text = dt.Rows[0]["bio"].ToString();
                 pwd.Visible = false;
                 pwderror.Visible = false;
                 txt_contact.Text = dt.Rows[0]["contactno"].ToString();

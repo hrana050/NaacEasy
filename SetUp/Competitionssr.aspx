@@ -7,7 +7,7 @@
             $(document).ready(function () {
                 var baseUrl = (window.location).href; // You can also use document.URL
                 var koopId = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
-                if (koopId != "http://krmangalam.in/Naacinfo/SetUp/Competitionssr.aspx") {
+                if (koopId != "http://naaceasy.com/SetUp/Competitionssr.aspx") {
                     getcompetitionssr(koopId);
                     $("#btn_save").val('Update');
                 }
@@ -22,6 +22,7 @@
                     vmcompetitionssrobj.criteriasno = $('#<%=ddl_menu.ClientID %> option:selected').val();
                     vmcompetitionssrobj.universityname = $('#<%=txt_university.ClientID%>').val();
                     vmcompetitionssrobj.compssrdetails = $("#summernote").val();
+                    vmcompetitionssrobj.fileuploddetails = $("#filesupload").val();
                     vmcompetitionssrobj.status = $('#<%=ddl_status.ClientID %> option:selected').val();
                     vmcompetitionssrobj.type = type;
                     vmcompetitionssrobj.sno = koopId;
@@ -74,7 +75,8 @@
                             $('#<%=ddl_status.ClientID %>').val($(this).find("comstatus").text());
                             var wiki = $(this).find("criteiradetails").text();
                             $("#summernote").summernote("code", wiki);
-                       
+                            $("#filesupload").summernote("code", $(this).find("ssrfiles").text());
+                            
                             });
 
                         },
@@ -160,9 +162,17 @@
                            </div>
                     <div class="row" style="padding-top:15px;">
                     <div class="col-md-12">
-                  <label for="inputName">Criteria Details</label>
+                  <label for="inputName">SSR Details</label>
                       
                             <textarea id="summernote" style="height:100px;">
+             
+              </textarea>
+                   
+                        </div>
+                          <div class="col-md-12">
+                  <label for="inputName">File Upload</label>
+                      
+                            <textarea id="filesupload" style="height:100px;">
              
               </textarea>
                    
@@ -217,11 +227,8 @@
             height: 300,                 // set editor height
 
         });
-        $('#sopsummernote').summernote({
-            height: 300,                 // set editor height
-
-        });
-        $('#guidelines').summernote({
+        
+        $('#filesupload').summernote({
             height: 300,                 // set editor height
 
         });

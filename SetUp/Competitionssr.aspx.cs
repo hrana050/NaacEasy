@@ -96,6 +96,7 @@ public partial class SetUp_Competitionssr : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@sno", vmcompetitionssrobj.sno);
             }
             cmd.Parameters.AddWithValue("@universityname", vmcompetitionssrobj.universityname);
+            cmd.Parameters.AddWithValue("@ssrfiles", vmcompetitionssrobj.fileuploddetails);
             cmd.Parameters.AddWithValue("@criteria", vmcompetitionssrobj.criteriasno);
             cmd.Parameters.AddWithValue("@criteiradetails", vmcompetitionssrobj.compssrdetails);
             cmd.Parameters.AddWithValue("@isactive", vmcompetitionssrobj.status);

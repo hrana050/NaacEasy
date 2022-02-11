@@ -57,24 +57,8 @@
       </div>
     </div>
   </section>
-     <asp:UpdateProgress ID="MyProcess" runat="server" AssociatedUpdatePanelID="UpdatePanel1"
-        DisplayAfter="5">
-        <ProgressTemplate>
-            <div style="left: 0; position: fixed; width: 100%; height: 100%; z-index: 9999999; top: 0; background: rgba(0,0,0,0.5);">
-                <div style="text-align: center; z-index: 10; margin: 300px auto;">
-                    <img alt="img" src="../Img/loding.gif" style="height: 100px; width: 100px;" /><br />
-                    <br />
-                    <span>
-                        <h4>
-                            <asp:Label runat="server" Text="Please Wait..." ID="lblPleaseWait"></asp:Label>
-                    </span>
-                    </h4>
-                </div>
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>
-     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+
+
     <!-- Main content -->
     <section class="content" style="padding-left: 15px;padding-right: 15px;">
         <div class="row">
@@ -175,7 +159,32 @@
                          <div class="col-md-1" style="margin-top: 30px;">
                           <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddl_status" ErrorMessage="*" InitialValue="3" ForeColor="Red" ValidationGroup="Save"></asp:RequiredFieldValidator>
                 </div>   
-                  </div>
+                         <div class="col-md-5">
+                  <label for="inputName">Select Profile</label>
+                             <asp:FileUpload ID="FileUpload1" runat="server" class="form-control" accept="image/png, image/gif, image/jpeg" />
+                             </div>
+                         <div class="col-md-1" style="margin-top: 30px;">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="FileUpload1" ErrorMessage="*"  ForeColor="Red" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                </div>   
+                  </div><br />
+                      <div class="row">
+                             <div class="col-md-11">
+                  <label for="inputName">Degination</label>
+                                   <asp:TextBox ID="txt_desi" runat="server" class="form-control" AutoComplete="off"></asp:TextBox>
+                                 </div>
+                            <div class="col-md-1" style="margin-top: 30px;">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txt_desi" ErrorMessage="*"  ForeColor="Red" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                </div>   
+                          </div>
+                       <div class="row">
+                             <div class="col-md-11">
+                  <label for="inputName">Bio</label>
+                                   <asp:TextBox ID="txt_bio" runat="server" class="form-control" AutoComplete="off" TextMode="MultiLine"></asp:TextBox>
+                                 </div>
+                            <div class="col-md-1" style="margin-top: 30px;">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txt_bio" ErrorMessage="*"  ForeColor="Red" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                </div>   
+                          </div>
                 </div>
               
                 <div class="row">
@@ -242,7 +251,5 @@
     
       </section>
 
-  </ContentTemplate>
-                      </asp:UpdatePanel>
 </asp:Content>
 

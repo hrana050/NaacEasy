@@ -7,6 +7,8 @@
     <title></title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+              <script src="../js/jquery.preloader.min.js"></script>
+    <link href="../css/preloader.css" rel="stylesheet" />
     <link href="../NaacCustomFiles/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../NaacCustomFiles/css/ionicons.min.css" rel="stylesheet" />
     <link href="../NaacCustomFiles/css/select2.min.css" rel="stylesheet" />
@@ -14,28 +16,102 @@
     <link href="../NaacCustomFiles/css/_all-skins.min.css" rel="stylesheet" />
     <link href="../NaacCustomFiles/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
     <link href="../css/customcssfile.css" rel="stylesheet" />
-<link href="https://db.onlinewebfonts.com/c/511031ed9122c8ea1450b18b876221fe?family=SF+Pro+Rounded" rel="stylesheet" type="text/css"/>
-    <script src="../js/customfile.js"></script>
+    <script src="../js/naaceasyjsfile.js"></script>
+    <style>
+        .naactitle{
+font-style: normal;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 64px;
+}
+.easytitle{
+        font-weight: 500;
+    font-size: 48px;
+    line-height: 64px;
+    font-style: normal;
+
+}
+        .someBlock {
+            
+        }
+    </style>
+    <script>
+        function getprofile(sno) {
+
+            $.ajax({
+                type: "POST",
+                url: "naaceasy.aspx/getprofile",
+                data: '{id:"' + sno + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var xmlDoc = $.parseXML(response.d);
+                    var xml = $(xmlDoc);
+                    var customers = xml.find("Table");
+                    var rows = '';
+                    $.each(customers, function () {
+                        
+                        var name = $(this).find("name").text();
+                     
+                        $("#myModalLabel").val(name);
+                        $("#popupbtn").click()
+                    });
+                },
+                error: function (response) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                }
+            });
+
+        }
+    </script>
 </head>
+     
         <body class="hold-transition skin-blue sidebar-mini">
+           
+             
             <div class="wrapper">
+              
     <form id="form1" runat="server">
+          <div class="align-self-center someBlock"></div>
+          <script>
+              $(document).ready(function () {
+
+                
+
+
+              });
+              var obj = {},
+         someBlock = $('.someBlock');
+
+              function loder() {
+                  someBlock.preloader({
+                      text: obj.textVal,
+                      percent: obj.percentVal,
+                      duration: obj.durationVal
+                  });
+              }
+
+              function stoploader() {
+                  someBlock.preloader('remove');
+              }
+   </script>
   <header class="main-header">
+  <div class="row">
+      <div class="col-lg-3 naacheaderpadding">
     <!-- Logo -->
     <a href="index2.html" class="logo">
-
-      <span class="logo-mini"><b>Naac</b>E</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg" style="text-align:left"><b>Naac</b> Easy</span>
+      <span class="logo-lg" style="float:left"><span class="naactitle">Naac</span> <span class="easytitle">Easy</span></span>
     </a>
-
+</div>
+        <div class="col-lg-9 headerpadding">
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
     
-         <div class="input-group" style="width:400px; float:left;margin-top:7px;padding-left: 30px;">
+         <div class="input-group searchdiv" style="display:none">
               
-          <input type="text" name="q" class="form-control" placeholder="Search for criteria, tasks, meeting notes, and more..." style="border-radius: 10px;height: 36px;width: 450px;" />
+          <input type="text" name="q" class="form-control searchinputbox" placeholder="Search for criteria, tasks, meeting notes, and more..." />
          <span class="input-group-btn" style="left: -39px;">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat" style="background-color: #fff;border-radius: 10px;">
                   <i class="fa fa-search"></i>
@@ -45,12 +121,13 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
           
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" style="display:flex; align-items:center">
         
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
+              <img src="../Img/bell.svg" class="showlgdevice" />
+              <img src="../Img/bell_small.svg" class="showsmalldevice" />
               <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
@@ -65,25 +142,11 @@
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
                       <i class="fa fa-users text-red"></i> 5 new members joined
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
+                
+                 
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -93,8 +156,8 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <span class="hidden-xs">Hi <b>Hemant Singh</b></span>
-              <img src="../Img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                 <span class="hidden-xs topprofile">Hi <b><asp:Label ID="lblname_1" runat="server"></asp:Label></b></span>
+              <img src="../Img/user2-160x160.jpg" class="profileimg" alt="User Image" />
              
             </a>
             <ul class="dropdown-menu">
@@ -103,32 +166,20 @@
                 <img src="../Img/user2-160x160.jpg" class="img-circle" alt="User Image" />
 
                 <p>
-                  Hemant Singh Rana - Dot Net Developer
+                  <asp:Label ID="lblname_2" runat="server"></asp:Label> - Dot Net Developer
                   <small>Member since Nov. 2020</small>
                 </p>
               </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
+            
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                       <a class="btn btn-default btn-flat" onclick="getprofile();" style="cursor:pointer">Profile</a>
+                       <button type="button" data-toggle="modal" data-target="#aboutModal" id="popupbtn" style="display:none">
+                </button>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <asp:LinkButton ID="lnklogout" runat="server" OnClick="lnklogout_Click" class="btn btn-default btn-flat">Sign out</asp:LinkButton>
                 </div>
               </li>
             </ul>
@@ -139,10 +190,13 @@
       </div>
 
     </nav>
+            </div>
+        </div>
   </header>
+        <div class="row">
+<div class="col-lg-3">
  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar" style="padding-left: 15px;
-    padding-right: 15px;">
+  <aside class="main-sidebar" style="width: 100%;">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -150,55 +204,90 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
      
       <ul class="sidebar-menu" data-widget="tree">
-        <li>
-          <a onclick="visibledashboard();" style="cursor:pointer">
-            <i class="fa fa-home"></i> <span>Dashboard</span>
+        <li style="display:none">
+          <a onclick="visibledashboard();" class="topmenu"  id="dashboardli">
+           <img src="../Img/home_deselected.svg" id="dashboardimg" class="showlgdevice"/>
+               <img src="../Img/home_deselected_small.svg" id="smalldashboardimg" class="showsmalldevice"/> <span class="dashmargin">Dashboard</span>
           </a>      
         </li>
         <li>
-          <a onclick="visiblemeetingtab();" style="cursor:pointer">
-            <i class="fa fa-book"></i> <span>Meeting Notes</span>
+          <a onclick="visiblemeetingtab();"  class="topmenu" id="meetingnoteli">
+           <img src="../Img/notes_deselected.svg" / id="meetingnoteimg" class="showlgdevice"/>
+             <img src="../Img/todo_deselected_small.svg" id="smallnotesimg" class="showsmalldevice" />    <span class="dashmargin">Meeting Notes</span>
           </a>      
         </li>
             <li>
-          <a onclick="visibletodotab();" style="cursor:pointer">
-            <i class="fa fa-calendar"></i> <span>To Do Task</span>
+          <a onclick="visibletodotab();"  class="topmenu" id="todoli">
+           <img src="../Img/todo_deselected.svg" id="todoimg" class="showlgdevice" />
+           <img src="../Img/todo_deselected_small.svg" id="smalltodoimg" class="showsmalldevice" /> <span class="dashmargin">To Do Task</span>
           </a>      
         </li>
           <li class="header">CRITERIA</li>
          <li class="treeview">
-             <div>
-             <%--  <ul class="sidebar-menu" data-widget="tree" id="menudemo">
+             <div style="height: 250px; overflow-y: auto;overflow-x: hidden;">
+               <ul class="sidebar-menu" data-widget="tree" id="menudemo" style="margin-right:4px;">
 
-                   </ul>--%>
+                   </ul>
                  </div>
              </li>
           
-             <li class="header">Quick Links</li>
+             <li class="quicklink">Quick Links</li>
            <li>
-                <a href="../UpLoad/SOP-General-University-as-on-01-01-2021.pdf" target="_blank">SOP General University  <i class="fa fa-external-link-square" style="float:right"></i></a> 
+                <a href="../UpLoad/SOP-General-University-as-on-01-01-2021.pdf" target="_blank">SOP General University <img src="../Img/arrow.up.forward.app.svg"  style="float:right;margin-top: 10px;"/></a> 
                 </li>
+              
                 <li>
-                <a href="../UpLoad/NAAC Easy.docx" target="_blank">NAAC Easy <i class="fa fa-external-link-square" style="float:right"></i></a>
-                </li>
-                <li>
-                <a href="../UpLoad/NAAC Revised University Manual 06.4.2021.pdf" target="_blank">NAAC Revised University Manual <i class="fa fa-external-link-square" style="float:right"></i></a>
+                <a href="../UpLoad/NAAC Revised University Manual 06.4.2021.pdf" target="_blank">NAAC Revised Manual <img src="../Img/arrow.up.forward.app.svg"  style="float:right;margin-top: 10px;"/></a>
                 </li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
+    </div>
+     <div class="col-lg-9" style="padding-left:0px;">
       <div class="content-wrapper">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
-            
         </asp:ContentPlaceHolder>
           </div>
-
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <span><strong>Skills: </strong></span>
+                        <span class="label label-warning">HTML5/CSS</span>
+                        <span class="label label-info">Adobe CS 5.5</span>
+                        <span class="label label-info">Microsoft Office</span>
+                        <span class="label label-success">Windows XP, Vista, 7</span>
+                    </center>
+                    <hr>
+                    <center>
+                    <p class="text-left"><strong>Bio: </strong><br>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                    <br>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+         </div>
+  </div>
     </form>
      </div>
             
  <script src="../NaacCustomFiles/js/jquery.min.js"></script>
+  
 <script src="../NaacCustomFiles/js/bootstrap.min.js"></script>
             <script src="../NaacCustomFiles/js/select2.full.min.js"></script>
 <script src="../NaacCustomFiles/js/fastclick.js"></script>
@@ -221,6 +310,8 @@
          
              //bootstrap WYSIHTML5 - text editor
              $('.textarea').wysihtml5()
+             $('.todotextarea').wysihtml5()
+             
          })
          </script>
 </html>
