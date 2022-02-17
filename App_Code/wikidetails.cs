@@ -27,4 +27,5 @@ public class wikidetails
     public string filedescription { get; set; }
     public string datarequirement { get; set; }
     public string additionaldetails { get; set; }
+    public string tableformat { get; set; }
 }

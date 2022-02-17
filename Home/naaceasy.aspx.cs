@@ -13,6 +13,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
+using System.Collections.Generic;
+using System.Web;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 public partial class Home_naaceasy : System.Web.UI.Page
 {
@@ -350,6 +353,27 @@ public partial class Home_naaceasy : System.Web.UI.Page
 
        }
        [WebMethod]
+       public static string getkeymetriclist(string id)
+       {
+           string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+           using (SqlConnection con = new SqlConnection(constr))
+           {
+               using (SqlCommand cmd = new SqlCommand("getkeymetriclist", con))
+               {
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@metricid", id);
+                   cmd.Connection = con;
+                   using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                   {
+                       DataSet ds = new DataSet();
+                       sda.Fill(ds);
+                       return ds.GetXml();
+                   }
+               }
+           }
+
+       }
+       [WebMethod]
 
        public static string getcompssr(string id)
        {
@@ -440,5 +464,185 @@ public partial class Home_naaceasy : System.Web.UI.Page
          }
 
      }
- 
+       [WebMethod]
+     public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
+     {
+         DirectoryInfo info = new DirectoryInfo(filePath);
+         if (!info.Exists)
+         {
+             info.Create();
+         }
+
+         string path = Path.Combine(filePath, fileName);
+         using (FileStream outputFileStream = new FileStream(path, FileMode.Create))
+         {
+             inputStream.CopyTo(outputFileStream);
+         }
+     } 
+     [WebMethod]
+     public static string insert_data(vmdatastructure vmdatastructureobj)
+     {
+   
+         string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+         using (SqlConnection con = new SqlConnection(constr))
+         {
+             using (SqlCommand cmd = new SqlCommand("sp_data_structure", con))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Connection = con;
+                 cmd.Parameters.AddWithValue("@dataid", vmdatastructureobj.dataid);
+                 cmd.Parameters.AddWithValue("@criteriaid", vmdatastructureobj.criteriaid);
+                 cmd.Parameters.AddWithValue("@keyindecator", vmdatastructureobj.keyindecator);
+                 cmd.Parameters.AddWithValue("@metric", vmdatastructureobj.metricid);
+                 cmd.Parameters.AddWithValue("@metrictitle", vmdatastructureobj.metrictitle);
+                 cmd.Parameters.AddWithValue("@programname", vmdatastructureobj.programname_112);
+                 cmd.Parameters.AddWithValue("@programcode", vmdatastructureobj.programcode_112);
+                 cmd.Parameters.AddWithValue("@coursename", vmdatastructureobj.coursename_132);
+                 cmd.Parameters.AddWithValue("@yearof_introduction", vmdatastructureobj.yearof_introduction_112);
+                 cmd.Parameters.AddWithValue("@cbcs_ecs_status", vmdatastructureobj.cbcs_ecs_status_112);
+                 cmd.Parameters.AddWithValue("@yearof_revision", vmdatastructureobj.yearof_revision_112);
+                 cmd.Parameters.AddWithValue("@yearof_cbcs_ecs_imp", vmdatastructureobj.yearof_cbcs_ecs_imp_112);
+                 cmd.Parameters.AddWithValue("@contentchangepast_5", vmdatastructureobj.contentchangepast_5_112);
+                 cmd.Parameters.AddWithValue("@course_code", vmdatastructureobj.course_code_132);
+                 cmd.Parameters.AddWithValue("@employabilitiyskill_development", vmdatastructureobj.employabilitiyskill_development);
+                 cmd.Parameters.AddWithValue("@yearof_offering", vmdatastructureobj.yearof_offering_132);
+                 cmd.Parameters.AddWithValue("@times_offered", vmdatastructureobj.times_offered_132);
+                 cmd.Parameters.AddWithValue("@durationof_course", vmdatastructureobj.durationof_course_132);
+                 cmd.Parameters.AddWithValue("@enroll_student", vmdatastructureobj.enroll_student_132);
+                 cmd.Parameters.AddWithValue("@stu_completing", vmdatastructureobj.stu_completing_132);
+                 cmd.Parameters.AddWithValue("@qualitative", vmdatastructureobj.qualitative);
+                 cmd.Parameters.AddWithValue("@coursename_113", vmdatastructureobj.nameofcourse_113);
+
+                 cmd.Parameters.AddWithValue("@coursecode_113", vmdatastructureobj.coursecode_113);
+                 cmd.Parameters.AddWithValue("@courseintro_113", vmdatastructureobj.yearof_intro_113);
+                 cmd.Parameters.AddWithValue("@coursecontent_113", vmdatastructureobj.contentactivity_113);
+
+                 cmd.Parameters.AddWithValue("@programcode_134", vmdatastructureobj.programcode_134);
+                 cmd.Parameters.AddWithValue("@programname_134", vmdatastructureobj.programname_134);
+                 cmd.Parameters.AddWithValue("@studentname_134", vmdatastructureobj.studentname_134);
+
+                 if (vmdatastructureobj.type == "update" && vmdatastructureobj.metrictype == "qualitative")
+                 {
+                     cmd.Parameters.AddWithValue("@type", "updateQualitative");
+                 }
+                 else if (vmdatastructureobj.type == "update" && vmdatastructureobj.metrictype == "list")
+                 {
+                     cmd.Parameters.AddWithValue("@type", "updatelist");
+                 }
+                 else if (vmdatastructureobj.type == "insert" && vmdatastructureobj.metrictype == "list")
+                 {
+                     cmd.Parameters.AddWithValue("@type", "insert");
+                 }
+              
+                 con.Open();
+                 cmd.ExecuteNonQuery();
+                 con.Close();
+               
+             }
+         }
+         return "success";
+     }
+     [WebMethod]
+     public static string getmetricdatalist(string id,string dataid,string metrictype)
+     {
+         string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+         using (SqlConnection con = new SqlConnection(constr))
+         {
+             using (SqlCommand cmd = new SqlCommand("sp_data_structure", con))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Connection = con;
+                 cmd.Parameters.AddWithValue("@metric", id);
+                 cmd.Parameters.AddWithValue("@dataid", dataid);
+                 if (metrictype=="list")
+                 {
+                     cmd.Parameters.AddWithValue("@Type", "get_112_122list");
+                 }
+                 else if (metrictype == "qualitative")
+                 {
+                     cmd.Parameters.AddWithValue("@Type", "qualitative");
+                 }
+           
+                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                 {
+                     DataSet ds = new DataSet();
+                     sda.Fill(ds);
+                     return ds.GetXml();
+                 }
+             }
+         }
+
+     }
+
+     [WebMethod]
+     public static string filelist(string id)
+     {
+
+         string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+         using (SqlConnection con = new SqlConnection(constr))
+         {
+             using (SqlCommand cmd = new SqlCommand("sp_metricdatafile", con))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Parameters.AddWithValue("@type", "list");
+                 cmd.Parameters.AddWithValue("@dataid", id);
+                 cmd.Connection = con;
+                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                 {
+                     DataSet ds = new DataSet();
+                     sda.Fill(ds);
+                     return ds.GetXml();
+                 }
+             }
+         }
+
+     }
+     [WebMethod]
+     public static string deletefile(string id)
+     {
+         try
+         {
+             string constr = "";
+             SqlCommand cmd;
+             constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+             SqlConnection con = new SqlConnection(constr);
+             cmd = new SqlCommand("sp_metricdatafile", con);
+             cmd.CommandType = CommandType.StoredProcedure;
+             cmd.Connection = con;
+             cmd.Parameters.AddWithValue("@fileid", id);
+             cmd.Parameters.AddWithValue("@type", "delete");
+             con.Open();
+             cmd.ExecuteNonQuery();
+             con.Close();
+             return "success";
+         }
+         catch (Exception ac)
+         {
+             return "Error";
+         }
+
+     }
+     
+    public static string removefile()
+     {
+         try
+         {
+             string constr = "";
+             SqlCommand cmd;
+             constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+             SqlConnection con = new SqlConnection(constr);
+             cmd = new SqlCommand("sp_metricdatafile", con);
+             cmd.CommandType = CommandType.StoredProcedure;
+             cmd.Connection = con;
+             cmd.Parameters.AddWithValue("@type", "removefile");
+             con.Open();
+             cmd.ExecuteNonQuery();
+             con.Close();
+             return "success";
+         }
+         catch (Exception ac)
+         {
+             return "Error";
+         }
+     }
 }

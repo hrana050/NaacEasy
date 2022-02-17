@@ -5,7 +5,6 @@
    
     <link href="../NaacCustomFiles/css/font-awesome.min.css" rel="stylesheet" />
 
-
     <script type="text/javascript">
         var checkboxValues = "";
         $('input[name=locationthemes]:checked').map(function () {
@@ -375,7 +374,7 @@
                         var k = criterialist.length;
                         var l = 0;
                         var meetingid = $(this).find("meetingid").text();
-                        rows += "<div class='col-lg-4'><div class='box box-primary direct-chat direct-chat-primary'><div class='box-header with-border'>";
+                        rows += "<div class='col-lg-4'><div class='box box-primary direct-chat direct-chat-primary boxpadding'><div class='box-header with-border'>";
                         rows += "<h3 class='meetingtitle'>" + meetingname + "</h3></div>";
                         rows+="<div class='box-body'><div class='direct-chat-messages' style='padding:0px !important;'><div class='direct-chat-msg'>";
                         rows += "<div class='direct-chat-info clearfix'></div>";
@@ -392,7 +391,7 @@
                         }
                         rows+= "</div>";
                         rows+= "<div class='direct-chat-msg'>";
-                        rows+="<div class='direct-chat-info clearfix' style='padding-top:32px;padding-bottom:32px;font-size:16px;'>";
+                        rows += "<div class='direct-chat-info clearfix meetinglistpd' style='font-size:16px;'>";
                         rows += "<p class='meetingdirect-chat-name '>METRICS</p>";
                         for (l = 0; l < k; l++) {
                             if (l > 0) {
@@ -1026,24 +1025,6 @@ tbody td:hover {
     border: none;
 }
 
-#sopdetails tbody td:active {
-    -webkit-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-        transform: initial;
-}
-#ssrfileuploaded span{
-        line-height: 28px;
-    font-size: 20px;
-    font-family: Helvetica;
-    font-weight: 600;
-}
-#ssrfileuploaded tbody td:active {
-    -webkit-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-        transform: initial;
-}
-
-
 tbody td:active {
     -webkit-transform: scale(0.7);
     -ms-transform: scale(0.7);
@@ -1102,8 +1083,8 @@ tbody td:active {
            <h4>Meeting Notes</h4>
         <p>Create and manage notes to streamline workflow</p>
               </div>
-            <div class="col-lg-4" style="top:20px;padding-left:0px;padding-right:0px;">
-   <button type="button" class="pull-right addmeetingnotebtn" id="Addmeetingbtn"><img src="../Img/plus.svg" /> <span style="margin: 0px 0px 0px 8px;"> Add New Note</span></button>
+            <div class="col-lg-4 paddingtop">
+   <button type="button" class="pull-right addmeetingnotebtn" id="Addmeetingbtn"><img src="../Img/plus.svg" /> <span class="spanmargin"> Add New Note</span></button>
 
                 </div>
       </div>
@@ -2006,8 +1987,11 @@ staffcriteria_selection:last-child{
               <p class="divcol2p">Benchmark</p>
                   <span id="benchmark" class="divcol2pval"></span>
               </div>
-                
-          <span></span>
+         <%--    <div class="col-lg-1 middleline" style="margin:0px;">
+
+                 </div>--%>
+     
+                  
       </div>
      </section>
        <section id="navtabsection" style="display:none;">
@@ -2024,10 +2008,20 @@ staffcriteria_selection:last-child{
     
   </ul>
       </div>
+            <div style="display:flex;width: 40%;">
+           <span class="middleline" style="margin:0px;height:52px;margin-left:150px"></span>
+                  <div class="col-lg-12" id="metriclistspanid" style="width:100%;height:45px;overflow-y:scroll">
+            
+            </div>
+                </div>
             </div>
      </section>
       
-    <section class="content" id="metricdetailsdiv" style="display:none;padding:48px;">
+    <section class="content" id="metricdetailsdiv" style="display:none;padding:48px;padding-top:24px">
+        <span id="metricid" style="display:none"></span>
+         <span id="metricadddiv" style="display:none"></span>
+          <span id="keyindicatorid" style="display:none"></span>
+          
             <div class="row" id="naacmanualmaindiv" style="display:none">
                 <div class="col-lg-8" style="padding-right:48px; padding-left:0px;">
                        <h3 class="h3class" style="margin-top:0px !important;">Details</h3>
@@ -2070,16 +2064,22 @@ staffcriteria_selection:last-child{
 
 <div class="box-body">
 <div class="direct-chat-messages">
-
-<div class="direct-chat-msg divheight" id="naacadditional">
-
-</div>
+    <div class="col-lg-12 formuladata"><center style=" margin: 16px 16px !important;">
+        <img src="../Img/123.rectangle.svg" /> 
+          <a class="formula_a" data-toggle="modal" data-target="#formuladata" style="cursor:pointer;justify-content: space-around;align-items: center;">View Formula</a>
+        </center>
+    </div>
+      <div class="col-lg-12 formuladata"><center style=" margin: 16px 16px !important;">
+        <img src="../Img/rectangles.group.svg" /> 
+          <a class="formula_a" style="cursor:pointer;justify-content: space-around;align-items: center;">View Table Formula</a>
+        </center>
+    </div>
 
 </div></div> </div> </div>
             </div>
             <div class="row" id="naacsopmaindiv" style="display:none">
                 <div class="col-md-12" style="padding-right:0px; padding-left:0px;">
-<div class="box box-primary direct-chat direct-chat-primary">
+<div class="box box-primary direct-chat direct-chat-primary" style="border: 2px solid #d2d6de;">
 
 <div class="box-body">
 <div class="direct-chat-messages" style="overflow:hidden;height: auto;">
@@ -2121,10 +2121,10 @@ staffcriteria_selection:last-child{
 
 </div></div> </div>
                        <div class="col-lg-12" style="padding-right:0px; padding-left:0px;">
-                            <h3 class="divboxprimary">File uploaded <img src="../Img/exclamationmark.circle.fill.svg" /></h3>
+                            <h3 class="divboxprimary" padding-bottom: 0px !important;>File uploaded <img src="../Img/exclamationmark.circle.fill.svg" /></h3>
                            <div class="box-body">
-<div class="direct-chat-messages">
-<div class="direct-chat-msg" id="ssrfileuploaded">
+<div class="direct-chat-messages" padding-top: 0px;>
+<div class="direct-chat-msg" id="ssrfileuploaded" >
 
 </div>
 
@@ -2134,7 +2134,318 @@ staffcriteria_selection:last-child{
                    
                     </div>
             </div>
-        </section>
+        <div class="row" id="naacmaindatadiv">
+            <input type="hidden" id="dataid" />
+              <input type="hidden" id="metrictype" />
+            <input type="hidden" id="showdatalistbymetric" />
+                <div class="col-lg-8" id="naac_132_133_div" style="padding-right:48px; padding-left:0px;display:none">
+<div class="box box-primary direct-chat direct-chat-primary">
 
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg" id="naadatadetails">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel"> Name of value added course offered <img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txtcourseoffered" placeholder="Eg: Introduction to Machine Learning" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Course code<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_coursecode" placeholder="Eg: CSE101" />
+                </div>
+             
+                  </div>
+     <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Course duration (hrs)<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_courseduration" placeholder="Eg: 45" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Year of offering<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_year" placeholder="Eg: 2022" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">No. of times offered<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_timeoffered" placeholder="Eg: 02" />
+                </div>
+             
+                  </div>
+       <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">No. of students enrolled<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_stuenrolled" placeholder="Eg: 42" />
+                </div>
+             
+                  </div>
+     <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">No. of students completing<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_completing" placeholder="Eg: 42" />
+                </div>
+             
+                  </div>
+</div>
+
+</div> </div> </div>
+               </div>
+                <div class="col-lg-8" id="naac_112_122_div" style="padding-right:48px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Programme Name <img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_112_122_name" placeholder="Eg: B.Tech. in Computer Science with specialisation in AI and Machine Learning" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Programme Code<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_112_122_code" placeholder="Eg: 0023" />
+                </div>
+                  </div>
+     <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Year of introduction<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_112_122_intro" placeholder="Eg: 2016" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">CBCS/ECS implementation Status <img src="../Img/exclamation_small.svg" /></label>
+                           <select id="txt_112_122_status" class="metricdropcss">
+                                <option value="0">Select</option>
+                               <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                           </select>
+                <%--  <input type="text" class="form-control" id="txt_112_122_status" placeholder="Eg: Yes" />--%>
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Year of CBCS/ECS implementation <img src="../Img/exclamation_small.svg" /></label>
+                             <select id="txt_112_122_yearimp" class="metricdropcss">
+                                  <option value="0">Select</option>
+                               <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                           </select>
+               
+                </div>
+             
+                  </div>
+       <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Year of revision (if any)<img src="../Img/exclamation_small.svg" /></label>
+                           <select id="txt_112_122_revision" class="metricdropcss">
+                                <option value="0">Select</option>
+                               <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                           </select>
+                </div>
+             
+                  </div>
+     <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">% of content change in past 5 yrs<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_112_122_content" placeholder="Eg: 42" />
+                </div>
+             
+                  </div>
+</div>
+
+</div> </div> </div>
+               </div>
+                   <div class="col-lg-8" id="naac_113_121_div" style="padding-right:48px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Name of course<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_113_121_name" placeholder="Eg: B.Tech. in Computer Science with specialisation in AI and Machine Learning" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Course code<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_113_121_code" placeholder="Eg: ETCS101" />
+                </div>
+                  </div>
+     <div class="col-lg-6" style="padding-left:3px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Year of introduction<img src="../Img/exclamation_small.svg" /></label>
+                             <select id="txt_113_121_intro" class="metricdropcss">
+                                <option value="0">Select</option>
+                               <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                           </select>                </div>
+             
+                  </div>
+      <div class="col-lg-12" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Activities/Content on employability/entrepeneurship/skill <img src="../Img/exclamation_small.svg" /></label>
+                            <input type="text" class="form-control" id="txt_113_121_content" placeholder="Eg: Hackathon, Amazon S3" />
+                           
+                <%--  <input type="text" class="form-control" id="txt_112_122_status" placeholder="Eg: Yes" />--%>
+                </div>
+             
+                  </div>
+
+</div>
+
+</div> </div> </div>
+               </div>
+                <div class="col-lg-8" id="naac_134_div" style="padding-right:48px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Program Name<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_134_name" placeholder="Eg: B.Tech. in Computer Science with specialisation in AI and Machine Learning" />
+                </div>
+             
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Program code<img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_134_code" placeholder="Eg: ETCS101" />
+                </div>
+                  </div>
+      <div class="col-lg-6" style="padding-left:0px;padding-right:3px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Name of the students<img src="../Img/exclamation_small.svg" /></label>
+                            <input type="text" class="form-control" id="txt_134_student" placeholder="Eg: Hemant" />
+                           
+                <%--  <input type="text" class="form-control" id="txt_112_122_status" placeholder="Eg: Yes" />--%>
+                </div>
+             
+                  </div>
+
+</div>
+
+</div> </div> </div>
+               </div>
+               <div class="col-lg-8" id="Qualitative" style="padding-right:24px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel"><b>Q.</b> <span id="qualitativequestion" style="line-height: 24px;font-size:16px;font-weight:400"></span></label>
+                            <textarea id="txt_qualitative" class="form-control" placeholder="Eg: Enter the metric qualitative inforamtion..."
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 2px solid #dddddd; padding: 10px;border-radius: 16px;font-size: 16px !important;"></textarea>
+                <%--  <input type="text" class="form-control" id="txt_qualitative" placeholder="Eg: Enter the metric qualitative inforamtion..." />--%>
+                </div>
+             
+                  </div>
+</div>
+
+</div> </div> </div>
+               </div>
+                <div class="col-lg-4" style="padding-right:0px; padding-left:0px; display:none" id="fileupload">
+                  <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Link to relevant documents <img src="../Img/exclamation_small.svg" /></label>
+                  <input type="text" class="form-control" id="txt_linktodocument" placeholder="Eg: https://testing.pdf" />
+                </div>
+             
+                  </div>
+     <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group">
+                <label class="datastylelabel">Files uploaded<img src="../Img/exclamation_small.svg" /></label>
+                      
+  <div class="file-field">
+    <div class="btn btn-outline-primary waves-effect float-left">
+      <span style="font-weight: 600;font-size: 16px;line-height: 20px;"><img src="../Img/arrow.up.doc.svg" /> File Upload</span>
+           <input type="file" name="fuUpload" id="fuUpload" onchange="uploaddatafile()" />
+    </div>
+  </div>
+                </div></div>
+      <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+             <div class="progress-group" style="display:none" id="progressreport">
+<div class="progress sm">
+<div class="progress-bar progress-bar-aqua" style="width:0%">0%</div>
+     <div class="msg" style="display:none"></div>
+</div>
+</div>
+           </div> <div class="col-lg-12" style="padding-left:0px;padding-right:0px;height:168px" id="filelistshow">
+
+                  </div>
+    </div>
+    </div>
+    </div>
+    </div>
+                  </div>
+            <div class="col-lg-8" id="datalist" style="padding-left:0px;padding-right:48px;display:none">
+                 <div class="accordion md-accordion" id="accordionEx3" style="overflow-x: hidden; overflow-y: scroll;height: 350px;" role="tablist" aria-multiselectable="true">
+                      
+</div>
+            </div>
+        </div>
+         <div class="row">
+                <div class="col-lg-8" style="padding-right:48px">
+            <button type="button" class="btn meetingsuccessbtn pull-right" style="display:none" id="savedata"><img src="../Img/checkmark.shield.svg" /> <span class="sucbtn">Save</span></button>
+            <button type="button" class="meetingdltbtn btn pull-right" style="border-color:#F24E1E;border-radius: 16px;display:none;" id="datadiscard" onclick="discardbtn()"><span class="btnspan">X</span><span class="dltbtn">Discard</span></button>
+            <button type="button" class="addmeetingnotebtn pull-right" style="display:none" id="Add_data" onclick="showmetricadddiv()"><img src="../Img/plus.svg" /> <span class="sucbtn">Add Data</span></button>
+             <button type="button" class="meetingdltbtn btn pull-right" style="border-color:#F24E1E;border-radius: 16px;display:none;" id="deletemetricdata"><img src="../Img/trash.svg" /><span class="dltbtn">Delete</span></button>
+             <button type="button" class="addmeetingnotebtn pull-right" style="display:none" id="edit_metricdata" onclick="editbutton()"><img src="../Img/pencil.svg"/> <span class="sucbtn">Edit</span></button>
+             <button type="button" class="addmeetingnotebtn pull-right" style="display:none" id="update_metricdata" onclick="updatebutton()"><img src="../Img/checkmark.shield.svg" /> <span class="sucbtn">Update</span></button>
+             </div>
+         </div>
+        </section>
+       <div class="modal fade" id="formuladata" tabindex="-1" role="dialog" aria-labelledby="formulaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius: 16px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="../Img/xmark.svg" /></button>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                      <div class="direct-chat-msg" id="naacadditional">
+
+</div>
+                    </center>
+                   
+                </div>
+              
+            </div>
+        </div>
+    </div>
 </asp:Content>
 

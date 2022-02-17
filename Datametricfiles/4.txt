@@ -1,0 +1,79 @@
+CREATE PROC [dbo].[SP_FacultyFeedback]                          
+@Type varchar(50),                          
+@SchoolId int=null,                          
+@AcSession int=null,                          
+@SemType int=null,                          
+@Department varchar(100)=null,                          
+@MobileNo varchar(13)=null,                          
+@Email varchar(50)=null,                          
+@Stmt nvarchar(50)=null,                          
+@Feedback nvarchar(50)=null,                          
+@UserId int=null,                         
+@UserType int=0,                        
+@Remarks varchar(500)=null,                         
+@Createdby varchar(50)=null,              
+@Suggestion varchar(max)=null,
+@username varchar(200)=null   
+                    
+AS                          
+BEGIN                   
+IF(@UserType!=12)                    
+SELECT @SemType= SemesterLinkingID from uni_SemesterLinking where ActiveSem=1 and SemesterLinkingID<>3;                  
+                  
+IF(NOT EXISTS(SELECT * FROM FacultyFeedback where UserId=@UserId AND AcSession=@AcSession AND  SemType=@SemType and UserType=@UserType) and @Type='InsertFacultyFeedback')                   
+BEGIN                   
+INSERT INTO FacultyFeedback(AcSession,SemType,UserId,UserType,SchoolId,Dept,Mobile,Email,Stmt,Feedback,Remarks,CreatedBy)VALUES                          
+(@AcSession,@SemType,@UserId,@UserType,@SchoolId,@Department,@MobileNo,@Email,@Stmt,@Feedback,@Remarks,@Createdby)                          
+END                   
+                         
+if(@Type='GetData')                        
+SELECT case when F.IsActive=1 then 'True' else 'false' end[Status] FROM FacultyFeedback F where UserId=@UserId AND AcSession=@AcSession                   
+                  
+if(@Type='GetDetailsFaculty')                            
+Begin                            
+select F.ID[FId],F.UserName,F.Faculty[Name],FD.Designation,case when isnull(FD.Images,0)=0 then 'false' else 'true'end[Image],substring(FD.Qualification,0,100)[Qualification],FD.Images,S.SchoolId,S.SchoolName,S.SchoolCode [Dpt],FD.MobileNo,L.Email from Fa
+culty F                
+Join School S ON S.SchoolId=F.SchoolId                 
+JOIN LoginDetail L ON L.LoginName=F.UserName                           
+LEFT Join FacultyDetail FD ON FD.FacultyId=F.UserName                            
+where F.UserName=@username               
+End               
+IF(@Type='InsertCourseFeedback')              
+BEGIN         
+IF NOT Exists(SELECT * From FacultyFeedback where UserType=@UserType and UserId=@UserId and AcSession=@AcSession and SemType=@SemType )         
+BEGIN            
+INSERT INTO FacultyFeedback(AcSession,SemType,UserId,UserType,SchoolId,Dept,Mobile,Email,Stmt,Feedback,Remarks,CreatedBy,Suggestion)VALUES                          
+(@AcSession,@SemType,@UserId,@UserType,@SchoolId,@Department,@MobileNo,@Email,@Stmt,@Feedback,@Remarks,@Createdby,@Suggestion)               
+END         
+ELSE        
+BEGIN        
+UPDATE FacultyFeedback SET Stmt=@Stmt,Feedback=@Feedback,Remarks=@Remarks,Suggestion=@Suggestion where UserType=13 and UserId=@UserId and AcSession=@AcSession and SemType=@SemType        
+END           
+END           
+IF(@Type='CourseEditFadback')            
+BEGIN            
+ SELECT * into #tempp from(           
+SELECT UserId, Id, ''[Statments],          
+       Split.a.value('.', 'VARCHAR(100)') Feedback            
+FROM   (SELECT UserId,Id,''[Statments],            
+               Dept,            
+               Cast ('<M>' + Replace(Feedback, ',', '</M><M>') + '</M>' AS XML) AS Data            
+        FROM   FacultyFeedback where UserType=@UserType and UserId=@UserId) AS A            
+       CROSS APPLY Data.nodes ('/M') AS Split(a)  
+       )x   
+       SELECT * from  #tempp    
+  
+ declare @Statment varchar(200);  
+select @Statment= Stmt From FacultyFeedback where UserType=@UserType and UserId=@UserId  
+select ISNULL(S.Column1,0)[stmt],* From FeedbackMaster F  
+left join dbo.BreakStringIntoRows(@Statment) S on s.Column1=F.Id   
+where F.UserType='C'  
+    
+select * From FeedbackMaster where UserType='C'  
+  
+select *, case when IsActive=1 then'true' else 'false'End[Status] from FacultyFeedback  where UserType=@UserType and UserId=@UserId   
+            
+ SELECT COUNT(Feedback)[Countfeedback] FROM #tempp where  Feedback<>0              
+              
+END                       
+END 

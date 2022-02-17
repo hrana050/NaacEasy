@@ -1,0 +1,71 @@
+CREATE Proc [dbo].[Sp_FeedBack] --@Type='FeedBackRecord',@RegId=null,@AcSession=6,@SemType=2 ,@SubjectId=176,@IsLab=0,@AcSession=6,@SemId=8,@FacultyId=47,@RegId=1166                    
+@Type Varchar(50),                      
+@RegId Int =null,                      
+@AcSession Int=null,                      
+@SemId Int=null,                      
+@SubjectId Int=null,                      
+@IsLab bit=0,                      
+@FacultyId int= null,                      
+@Statment nvarchar(500)=null,                      
+@Feedback nvarchar(500) =null,                      
+@Remarks varchar(100)=null,                    
+@Group int=null,            
+@SemType int=null,    
+@UserType varchar(5)=NULL,
+@section varchar(5)=null                     
+AS                      
+BEGIN               
+Set @SemID=(SELECT SemesterID FROM AcdemicRecord Where AcSession=@AcSession and Reg_Id=@RegId And SemType in (select SemesterLinkingID from uni_SemesterLinking where IsActive=1 and ActiveSem=1) and IsActive=1)                
+If(@Type='Bind')                      
+BEGIN                
+              
+Exec [S_SUBJECTLISTNEW] @AcSession,0,@SemID,@RegId              
+              
+END               
+              
+If(@Type='SearchFeedBackQues')                      
+BEGIN    
+if(@section is not null)
+begin               
+Select * from FeedbackMaster  where UserType=@UserType and (sesction=@section or @section=null)            
+END  
+else
+begin
+Select * from FeedbackMaster  where UserType=@UserType and sesction is null
+end
+end            
+                      
+IF(@Type='InsertFeedback')                      
+BEGIN              
+IF NOT exists(SELECT * FROM FeedBackData Where RegId=@RegId and AcSession=@AcSession and SemId=@SemId and SubjectId=@SubjectId and IsLab=@IsLab and FacultyId=@FacultyId )                
+INSERT INTO FeedBackData (AcSession,SemId,RegId,SubjectId,IsLab,FacultyId,Statment,FeedBack,Remarks)                       
+VALUES(@AcSession,@SemId,@RegId,@SubjectId,@IsLab,@FacultyId,@Statment,@Feedback,@Remarks)                      
+END              
+                      
+if(@Type='Search')                    
+Begin                    
+SELECT distinct F.Faculty[Faculty],F.ID FROM FacultyAttendanceMapping FA                     
+left JOIN Faculty F ON F.ID=FA.FacultyId                     
+left join FeedBackData FD on FD.RegId=@RegId  and Fd.SubjectId=FA.SubjectId and FA.IsLab=FD.IsLab and FD.FacultyId=FA.FacultyId                      
+Where SamesterId=@SemId and FA.SubjectId=@SubjectId and FA.IsLab=@IsLab and AcademicSession=@AcSession and Fa.IsActive=1 and FD.FacultyId IS NULL  and FA.GroupId=@Group                 
+END           
+          
+if(@Type='FeedBackRecord')            
+Begin            
+With CTE AS(            
+SELECT R.Name,R.Admission_No,S.Samester_Name,S.Course_Code,S.SchoolCode,S.SemesterLinkingID,SS.RegID[SSR],R.StuStatus,F.* from StudentSubjectMapping SS    JOIN V_CourseStructure V ON V.SamesterId=SS.SemID AND V.AcSession=SS.AcSession and V.ISlab=SS.IsLab 
+
+
+and V.SubjectId=SS.SubjectID      
+JOIN V_SemesterMaster S ON S.Samester_Id=SS.SemId and SS.IsActive=1            
+JOIN Registration R ON R.Reg_Id=SS.RegID --and R.AppliedFor!=3           
+LEFT JOIN FeedBackData F ON F.SemId=SS.SemID and F.AcSession=SS.AcSession and F.SubjectId=SS.SubjectID AND F.IsLab=SS.IsLab and F.RegId=SS.RegID            
+Where SS.AcSession=@AcSession and SS.IsActive=1--and SS.RegID=1910             
+)            
+SELECT Name, Admission_No,Samester_Name,Course_Code,SchoolCode,SSR,COUNT(SSR)[TCourse],SUM(case When RegId is null Then 0 Else 1 END)[TFeedback],COUNT(SSR)-SUM(case When RegId is null Then 0 Else 1 END)[Total] FROM CTE        
+Where SemesterLinkingID in (@SemType,3) and StuStatus=0  And (SSR=@RegId or @RegId is null)            
+Group by Admission_No,Name,Samester_Name,Course_Code,SchoolCode,SemesterLinkingID,SSR order by [Total] desc  
+  
+SELECT * FROM FacultyFeedback Where UserId=@RegId and UserType=12 and AcSession=@AcSession and SemType=@SemType               
+END                    
+END

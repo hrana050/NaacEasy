@@ -1081,7 +1081,7 @@ html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-family: "SF Pro Rounded", sans-serif !important;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -2373,15 +2373,14 @@ line-height: 28px;
     border-color: #F24E1E;
 }
     .dltbtn{
-            flex: none;
-    order: 1;
-    flex-grow: 0;
-    margin: 0px 16px;
+        color: #F24E1E;
+    font-family: SF Pro Rounded;
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 32px;
-    color: #F24E1E;
+    margin: 0px 16px;
+    order: 1;
     }
     .sucbtn{
             font-style: normal;
@@ -2920,9 +2919,343 @@ font-weight:500;
     border-radius: 16px;
     border: 2px solid #DBDBDB;
     }
+     .paddingtop{
+        top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+    }
+     .spanmargin{
+         margin: 0px 0px 0px 8px;
+     }
+       .boxpadding{
+        padding:24px !important;
+    }
+        .meetinglistpd{
+        padding-top: 32px;
+    padding-bottom: 32px;
+    }
+        #ssrfileuploaded td{
+        line-height: 28px !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+#ssrfileuploaded tbody td:active {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+        transform: initial;
+}
+   #ssrfileuploaded tr{
+    border: 2px solid #DBDBDB;
+}
+      #ssrfileuploaded td{
+    border: 0px solid #DBDBDB;
+}
+       .main-header .navbar .nav > li > a > .label {
+     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    right: 7px;
+    text-align: center;
+    font-size: 10px !important;
+    padding: 3px 3px;
+    line-height: 1.5 !important;
+    border-radius: 10px;
+    height: 16px;
+}
+       #sopdetails tbody td:active {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+        transform: initial;
+}
+         #sopdetails td{
+         border: 1px solid #8A939F;
+    }
+  #sopdetails ul{
+        padding-left: 15px;
+    }
+  .formuladata{
+      border: 2px solid #BABABA;
+    box-sizing: border-box;
+    box-shadow: inset 0px -3px 9px rgb(4 13 25 / 6%);
+    border-radius: 16px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 12px 0px;
+  }
+  .formula_a{
+  
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    color: #4F555D;
+    margin: 0px 16px;
+  }
+
 }
 
 @media (max-width: 1600px) {
+    .metricdropcss{
+      display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    background: #FDFDFD;
+    border: 2px solid #DBDBDB;
+  color: #4F555D;
+    box-sizing: border-box;
+    border-radius: 16px;
+    flex: none;
+    order: 1;
+font-weight: 600;
+    font-size: 20px;
+    flex-grow: 0;
+    width: 100%;
+    }
+    .select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+  .metricdropcss::placeholder {
+         font-size: 18px !important;
+    font-weight: 400;
+    color: #BABABA;
+}
+    .btnspan{
+            font-weight: 600 !important;
+    font-size: 18px;
+    color: #F24E1E;
+    }
+       .meetingdltbtn {
+         background-color: #FDFDFD;
+    margin: 0px 12px;
+    border: 2px solid #F24E1E !important;
+    box-sizing: border-box;
+    border-radius: 16px !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px !important;
+}
+       .meetingsuccessbtn {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px !important;
+    background: #0ACF83;
+    border-radius: 16px !important;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 12px;
+}
+    .dltbtn{
+          color: #F24E1E;
+    font-family: SF Pro Rounded !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    margin: 0px 8px;
+    order: 1;
+    }
+    .sucbtn{
+       color: #FDFDFD;
+            font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 8px;
+    }
+  
+    .datastylelabel {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    color: #1A1A1A;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-bottom: 4px;
+}
+      .formuladata{
+      border: 2px solid #BABABA;
+    box-sizing: border-box;
+    box-shadow: inset 0px -3px 9px rgb(4 13 25 / 6%);
+    border-radius: 12px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 12px 0px;
+  }
+        .formula_a{
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
+    color: #4F555D !important;
+    flex: none !important;
+  }
+    #sopdetails ul{
+        padding-left: 15px;
+    }
+    #sopdetails td{
+            /*font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    color: #8A939F;*/
+     border: 1px solid #8A939F;
+    }
+    #sopdetails tbody td:active {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+        transform: initial;
+}
+
+    .main-header .navbar .nav > li > a > .label {
+     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    right: 7px;
+    text-align: center;
+    font-size: 10px !important;
+    padding: 3px 3px;
+    line-height: 1.5 !important;
+    border-radius: 10px;
+    height: 16px;
+}
+        #ssrfileuploaded td{
+    border: 0px solid #DBDBDB;
+}
+    #ssrfileuploaded td{
+        line-height: 24px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+     #ssrfileuploaded tr{
+    border: 2px solid #DBDBDB;
+}
+   
+#ssrfileuploaded tbody td:active {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+        transform: initial;
+}
+    .sidebarlimenu {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 3px 16px !important;
+    background: #FDFDFD !important;
+    border-radius: 16px !important;
+}
+    .meetinglistpd{
+        padding-top: 24px;
+    padding-bottom: 24px;
+    }
+    .direct-chat-img {
+    border-radius: 50%;
+    float: left;
+    width: 62px;
+    height: 62px;
+}
+    .meeting_a {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    float: right;
+    color: #2A85FF;
+    cursor: pointer;
+}
+    .direct-chat-timestamp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    color: #8A939F;
+    margin: 0px 2px;
+}
+    .meetingptag {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    background: #2A85FF;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    color: #FDFDFD;
+}
+    .meetingdirect-chat-name {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px 8px 0px;
+    color: #8A939F;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.04em;
+}
+    .boxpadding{
+        padding:18px !important;
+    }
+    .content-wrapper > .content {
+    padding-left: 24px;
+    padding-right: 48px;
+}
+       .spanmargin{
+         margin: 0px 0px 0px 4px;
+     }
+    .paddingtop{
+        top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    }
+    .addmeetingnotebtn {
+    color: #FDFDFD;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    border-color: #2A85FF;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    border: none !important;
+    margin: 0px 0px;
+    background: #2A85FF;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+padding: 8px 12px;
+}
       .divmargin{
         margin-left: 12px;
     margin-right: 12px;
@@ -3093,13 +3426,13 @@ font-weight:500;
 
     }
       .skin-blue .sidebar-menu > li > a {
-    font-size: 20px;
+    font-size: 18px;
 }
       .dashmargin {
     margin: 0px 8px;
 }
       .sidebar-menu > li, span {
-    line-height: 28px;
+    line-height: 26px;
     font-weight: 500;
 }
       .sidebar-menu > li > a {
@@ -3151,7 +3484,7 @@ font-weight:500;
           padding-top:6px !important;
       }
       .nav-item {
-    font-size: 20px;
+    font-size: 18px;
     padding-left: 0px !important;
     padding-right: 0px !important;
     font-weight: 400;
@@ -3171,6 +3504,7 @@ font-weight:500;
 }
       .titlediv{
       padding: 12px 24px !important;
+      padding-right: 48px !important;
 }
       .divcol1 {
     display: flex;
@@ -3188,7 +3522,7 @@ font-weight:500;
     color: #FEFEFE;
     order: 0;
     flex-grow: 0;
-    margin: 0px 5px;
+    margin: 0px 0px;
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
@@ -3707,27 +4041,7 @@ output {
     line-height: 1.42857143;
     color: #555;
 }
-.form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-}
+
 .form-control:focus {
     border-color: #66afe9;
     outline: 0;
@@ -6245,8 +6559,8 @@ a.thumbnail:hover {
     float: left;
     width: 0%;
     height: 100%;
-    font-size: 12px;
-    line-height: 20px;
+ font-size: 12px;
+    line-height: 12px;
     color: #fff;
     text-align: center;
     background-color: #337ab7;

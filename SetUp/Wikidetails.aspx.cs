@@ -97,7 +97,7 @@ public partial class SetUp_Wikidetails : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@filedescription", Details.filedescription);
             cmd.Parameters.AddWithValue("@datarequirement", Details.datarequirement);
             cmd.Parameters.AddWithValue("@additiondetails", Details.additionaldetails);
-
+            cmd.Parameters.AddWithValue("@tabledata", Details.tableformat);
             cmd.Parameters.AddWithValue("@menuid", Details.menuid);
             cmd.Parameters.AddWithValue("@title", Details.title);
             cmd.Parameters.AddWithValue("@value", Details.value);

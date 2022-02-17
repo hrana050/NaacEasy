@@ -30,6 +30,7 @@
                     Details.filedescription = $("#filedesc").val();
                     Details.datarequirement = $("#datarequirement").val();
                     Details.additionaldetails = $("#additionaldetails").val();
+                    Details.tableformat = $("#tableformat").val();
                     Details.guidelines = $("#guidelines").val();
                     Details.user = user;
                     Details.status = $('#<%=ddl_status.ClientID %> option:selected').val();
@@ -102,6 +103,7 @@
                             //$("#sopsummernote").val($(this).find("sopdetails").text());
                             var krmuguide = $(this).find("krmuguide").text();
                             $("#guidelines").summernote("code", krmuguide);
+                            $("#tableformat").summernote("code", $(this).find("tabledata").text());
                             //    $("#guidelines").val($(this).find("krmuguide").text());
 
                         });
@@ -238,10 +240,18 @@
               </textarea>
                    
                         </div>
-                         <div class="col-md-12">
+                         <div class="col-md-6">
                   <label for="inputName">Guidelines</label>
                       
                             <textarea id="guidelines" style="height:100px;">
+             
+              </textarea>
+                   
+                        </div>
+                         <div class="col-md-6">
+                  <label for="inputName">Table Format Data</label>
+                      
+                            <textarea id="tableformat" style="height:100px;">
              
               </textarea>
                    
@@ -315,7 +325,11 @@
             height: 300,                 // set editor height
 
         });
+        $('#tableformat').summernote({
+            height: 300,                 // set editor height
 
+        });
+        
     })
 </script>
 </asp:Content>

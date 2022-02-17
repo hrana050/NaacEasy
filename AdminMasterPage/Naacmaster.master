@@ -37,31 +37,31 @@ font-style: normal;
     </style>
     <script>
         function getprofile(sno) {
-
-            $.ajax({
-                type: "POST",
-                url: "naaceasy.aspx/getprofile",
-                data: '{id:"' + sno + '" }',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var xmlDoc = $.parseXML(response.d);
-                    var xml = $(xmlDoc);
-                    var customers = xml.find("Table");
-                    var rows = '';
-                    $.each(customers, function () {
+            $("#popupbtn").click()
+            //$.ajax({
+            //    type: "POST",
+            //    url: "naaceasy.aspx/getprofile",
+            //    data: '{id:"' + sno + '" }',
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (response) {
+            //        var xmlDoc = $.parseXML(response.d);
+            //        var xml = $(xmlDoc);
+            //        var customers = xml.find("Table");
+            //        var rows = '';
+            //        $.each(customers, function () {
                         
-                        var name = $(this).find("name").text();
+            //            var name = $(this).find("name").text();
                      
-                        $("#myModalLabel").val(name);
-                        $("#popupbtn").click()
-                    });
-                },
-                error: function (response) {
-                    var r = jQuery.parseJSON(response.responseText);
-                    alert("Message: " + r.Message);
-                }
-            });
+            //            $("#myModalLabel").val(name);
+            //            $("#popupbtn").click()
+            //        });
+            //    },
+            //    error: function (response) {
+            //        var r = jQuery.parseJSON(response.responseText);
+            //        alert("Message: " + r.Message);
+            //    }
+            //});
 
         }
     </script>
@@ -120,9 +120,14 @@ font-style: normal;
         </div> 
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
-          
+       
         <ul class="nav navbar-nav" style="display:flex; align-items:center">
-        
+        <li>
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span style="color: #2a85ff;font-size: 18px;"><span style="color:black">Mail Us:</span> support@naaceasy.com</span> <br />
+          <span style="color: #2a85ff;font-size: 18px;"><span style="color:black">Helpline No:</span> 011-3013-3000</span> 
+            </a>
+        </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -175,7 +180,7 @@ font-style: normal;
               <li class="user-footer">
                 <div class="pull-left">
                        <a class="btn btn-default btn-flat" onclick="getprofile();" style="cursor:pointer">Profile</a>
-                       <button type="button" data-toggle="modal" data-target="#aboutModal" id="popupbtn" style="display:none">
+                       <button type="button" data-toggle="modal" data-target="#myModal" id="popupbtn" style="display:none">
                 </button>
                 </div>
                 <div class="pull-right">
@@ -210,13 +215,13 @@ font-style: normal;
                <img src="../Img/home_deselected_small.svg" id="smalldashboardimg" class="showsmalldevice"/> <span class="dashmargin">Dashboard</span>
           </a>      
         </li>
-        <li>
+        <li style="display:none">
           <a onclick="visiblemeetingtab();"  class="topmenu" id="meetingnoteli">
            <img src="../Img/notes_deselected.svg" / id="meetingnoteimg" class="showlgdevice"/>
              <img src="../Img/todo_deselected_small.svg" id="smallnotesimg" class="showsmalldevice" />    <span class="dashmargin">Meeting Notes</span>
           </a>      
         </li>
-            <li>
+            <li style="display:none">
           <a onclick="visibletodotab();"  class="topmenu" id="todoli">
            <img src="../Img/todo_deselected.svg" id="todoimg" class="showlgdevice" />
            <img src="../Img/todo_deselected_small.svg" id="smalltodoimg" class="showsmalldevice" /> <span class="dashmargin">To Do Task</span>
@@ -224,21 +229,21 @@ font-style: normal;
         </li>
           <li class="header">CRITERIA</li>
          <li class="treeview">
-             <div style="height: 250px; overflow-y: auto;overflow-x: hidden;">
+             <div style="height: 470px; overflow-y: auto;overflow-x: hidden;">
                <ul class="sidebar-menu" data-widget="tree" id="menudemo" style="margin-right:4px;">
 
                    </ul>
                  </div>
              </li>
           
-             <li class="quicklink">Quick Links</li>
+           <%--  <li class="quicklink">Quick Links</li>
            <li>
                 <a href="../UpLoad/SOP-General-University-as-on-01-01-2021.pdf" target="_blank">SOP General University <img src="../Img/arrow.up.forward.app.svg"  style="float:right;margin-top: 10px;"/></a> 
                 </li>
               
                 <li>
                 <a href="../UpLoad/NAAC Revised University Manual 06.4.2021.pdf" target="_blank">NAAC Revised Manual <img src="../Img/arrow.up.forward.app.svg"  style="float:right;margin-top: 10px;"/></a>
-                </li>
+                </li>--%>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -311,7 +316,7 @@ font-style: normal;
              //bootstrap WYSIHTML5 - text editor
              $('.textarea').wysihtml5()
              $('.todotextarea').wysihtml5()
-             
+         
          })
          </script>
 </html>

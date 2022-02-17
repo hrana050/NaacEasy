@@ -76,24 +76,80 @@
     border: 1px solid #f3f3f3;
 
 }
+@media (max-width: 1920px) {
+     .form-control::placeholder {
+         font-size: 24px !important;
+    font-weight: 500;
+    color: #BABABA;
+}
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        font-family: "SF Pro Rounded", sans-serif;
+        line-height: 1;
+        background-color: #FDFDFD;
+        color: #495057;
+        font-size: 20px;
+        height: 60px;
+        line-height: 28px;
+        color: #4F555D;
+        font-weight: 600;
+        background-clip: padding-box;
+        border: 2px solid #dbdbdb;
+        border-radius: 16px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+}
 
-.form-control {
-display: block;
-    width: 100%;
-    padding: 16px;
-    font-family: "SF Pro Rounded", sans-serif;
-    line-height: 1;
-    background-color: #FDFDFD;
-    color: #495057;
-    font-size: 20px;
-    height: 60px;
-    line-height: 28px;
-    color: #4F555D;
-    font-weight: 600;
-    background-clip: padding-box;
-    border: 2px solid #dbdbdb;
+@media (max-width: 1600px) {
+    .btn[class*="btn-outline-"] {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+.btn-outline-primary {
+   width: 100%;
+    background: #FDFDFD;
+    border: 2px solid #DBDBDB;
+    box-sizing: border-box;
     border-radius: 16px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.file-field input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+     .form-control::placeholder {
+         font-size: 18px !important;
+    font-weight: 400;
+    color: #BABABA;
+}
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        font-family: "SF Pro Rounded", sans-serif;
+        line-height: 1;
+        background-color: #FDFDFD;
+        color: #495057;
+        font-size: 20px;
+        height: 50px;
+        line-height: 28px;
+        color: #4F555D;
+        font-weight: 600;
+        background-clip: padding-box;
+        border: 2px solid #dbdbdb;
+        border-radius: 16px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 }
 
 .add-items .btn {
