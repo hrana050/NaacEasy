@@ -46,17 +46,14 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 6	0	1113	0	E0004	Suman Bhat	PRT	January	2022	Active	31
 11	0	1134	0	E0005	Aashima Lal Sharma	PRT	January	2022	Active	31
 12	0	1135	0	E0006	Shalini Pratap Jain	PRT	January	2022	Active	25
-13	0	1136	0	E0007	Beena Vijji	PRT	January	2022	Active	
 14	0	1139	0	E0008	Ruchi Sehgal	PRT	January	2022	Active	31
 17	0	1164	0	E0010	Anju Sen	PRT	January	2022	Active	31
 18	0	1167	0	E0011	Asha Bidhuri	PRT	January	2022	Active	31
 19	0	1169	0	E0012	Asma Malik	PRT	January	2022	Active	30
 20	0	1193	0	E0013	Shivani Bhola	PRT	January	2022	Active	31
-25	0	1214	0	E0015	Geeta Arora	PRT	January	2022	Active	
 28	0	2005	0	E0017	Nisha Raheja	PRT	January	2022	Active	31
 29	0	2007	0	E0018	Kanika Bagga	PRT	January	2022	Active	31
 38	0	2036	0	E0020	Payal Gupta	PRT	January	2022	Active	26
-48	0	3333	0	E0021	Bhavna Bhatia	PRT	January	2022	Active	
 49	0	3350	0	E0022	Neha Chhabra	PRT	January	2022	Active	31
 51	0	3360	0	E0023	Sanya Gupta	PRT	January	2022	Active	31
 53	0	3370	0	E0024	Anu Sharma	PRT	January	2022	Active	30
@@ -67,7 +64,6 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 66	0	3453	0	E0030	Shivani Sharma	PRT	January	2022	Active	30
 67	0	3454	0	E0031	Anshu Chawla	PRT	January	2022	Active	31
 68	0	3455	0	E0032	Arti Sharma	PRT	January	2022	Active	31
-71	0	3467	0	E0033	Srabani Bose	PRT	January	2022	Active	
 72	0	3471	0	E0034	Subarna Zaman	PRT	January	2022	Active	31
 74	0	3478	0	E0036	Isha Bajaj	PRT	January	2022	Active	0
 79	0	3499	0	E0038	Heena Gupta	PRT	January	2022	Active	0
@@ -75,7 +71,6 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 83	0	3539	0	E0040	Seema Moses	PRT	January	2022	Active	30
 84	0	3543	0	E0041	Ruchika Madan	PRT	January	2022	Active	30
 85	0	3552	0	E0042	Lubna Iram	PRT	January	2022	Active	31
-87	0	3567	0	E0043	Gunjan Singh	PRT	January	2022	Active	
 89	0	3571	0	E0045	Gurdeep Ahluwalia	PRT	January	2022	Active	31
 91	0	3586	0	E0046	Gurpreet Kaur Rana	PRT	January	2022	Active	31
 93	0	3597	0	E0047	Archana	PRT	January	2022	Active	28
@@ -100,7 +95,8 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 395	0	1506		G0007	JAY PRAKASH THAKUR	PGT	January	2022	Active	30
 396	0	1507		G0008	NEHA KAKKAR	PGT	January	2022	Active	31
 430	0	1533		G0009	PRIYANKA RAJORIA KATYAL	PGT	January	2022	Active	31
-436	0	1539		G0010	SANDEEP SETHI	PGT	January	2022	Active	
+442	0	1544		G0011	KAMLESH MALIK	PGT	January	2022	Active	31
+452	0	1550		G0012	PRIYA ANAND	PGT	January	2022	Active	31
 190	0	1088	0	H0005	Richa Tayal	TGT	January	2022	Active	30
 278	0	1395		H0012	Umesh Madhok	TGT	January	2022	Active	29
 287	0	1403		H0013	Madhuri Chopra	TGT	January	2022	Active	31
@@ -110,31 +106,26 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 431	0	1534		H0023	MANJOT KAUR	TGT	January	2022	Active	30
 433	0	1536		H0024	SADHANA YADAV	TGT	January	2022	Active	30
 439	0	1541		H0025	PRIYANKA JAIN	TGT	January	2022	Active	31
-440	0	1542		H0026	POOJA GUPTA	TGT	January	2022	Active	
-247	0	1032	0	I0007	Sudha Seth	PRT	January	2022	Active	
+443	0	1545		H0027	NIHARIKA	TGT	January	2022	Active	31
 259	0	1337	0	I0010	Amarpreet Kaur Sachdeva	PRT	January	2022	Active	29
-166	0	1380	0	I0018	AANCHAL WADHWA	PRT	January	2022	Active	
-303	0	1420		I0024	Sonam Gaba	PRT	January	2022	Active	
-306	0	1428		I0026	Ria Toora	PRT	January	2022	Active	
 304	0	1421		I0027	Ishveen Kaur	PRT	January	2022	Active	31
 327	0	1440		I0030	Gurbandhana Kaur	PRT	January	2022	Active	31
 332	0	1445		I0032	Barna Mukherjee	PRT	January	2022	Active	30
 336	0	1448		I0034	ANISHA GUPTA	PRT	January	2022	Active	21
-339	0	1452		I0035	JASPREET KAUR	PRT	January	2022	Active	31
+339	0	1452		I0035	JASPREET KAUR	Act Tr	January	2022	Active	31
 346	0	1453		I0036	RICHA NANDA	Jr LIB	January	2022	Active	29
-349	0	1456		I0037	NIDHI CHAUDHARY	PRT	January	2022	Active	
 362	0	1471		I0038	SHAGUN KHANNA	PRT	January	2022	Active	31
-363	0	1472		I0039	DAMYANTI MEHTA	PRT	January	2022	Active	31
-376	0	1486		I0042	ATIKSHA JAIN	PRT	January	2022	Active	31
+363	0	1472		I0039	DAMYANTI MEHTA	Act Tr	January	2022	Active	31
+376	0	1486		I0042	ATIKSHA JAIN	Act Tr	January	2022	Active	31
 384	0	1493		I0043	PALAK DUA	PRT	January	2022	Active	30
 375	0	1485		I0047	MONIKA BHANDARI	PRT	January	2022	Active	31
 420	0	2083		I0049	Deenbandhu	PRT	January	2022	Active	30
 421	0	2084		I0050	Nikita Agrawal	Spanish Teacher	January	2022	Active	31
 422	0	2085		I0051	Akhtar Ali	Chemistry Teacher	January	2022	Active	28
-432	0	1535		I0052	RUPALI MALHOTRA	PRT	January	2022	Active	
 434	0	1537		I0053	SAKSHI SHARMA	PRT	January	2022	Active	30
-435	0	1538		I0054	SAKSHI SONI 	PRT	January	2022	Active	
 437	0	1540		I0055	GARIMA KUMAR	PRT	January	2022	Active	31
+453	0	1551		I0056	SONALI SHARMA	PRT	January	2022	Active	30
+454	0	1552		I0057	PRIYA GERA	PRT	January	2022	Active	31
 131	0	7006	0	J0004	Veena Gupta	Act Tr	January	2022	Active	31
 146	0	1030	0	J0005	Akram Baig	Act Tr	January	2022	Active	31
 149	0	1097	0	J0006	Prakash Kumar	Act Tr	January	2022	Active	31
@@ -142,23 +133,33 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 147	0	1346	0	J0009	Anand Gupta	Act Tr	January	2022	Active	31
 122	0	1351	0	J0010	Amit Kumar	Act Tr	January	2022	Active	31
 307	0	1418		J0012	Priyanka Gosain	Act Tr	January	2022	Active	31
-321	0	1423		J0014	Gyan Deepak	TGT	January	2022	Active	30
-322	0	1436		J0015	Naresh Kumar Nagar	PRT	January	2022	Active	31
-154	0	1029	0	K0010	Mohd. Javed Akhtar 	HardT	January	2022	Active	
+321	0	1423		J0014	Gyan Deepak	Act Tr	January	2022	Active	30
+322	0	1436		J0015	Naresh Kumar Nagar	Act Tr	January	2022	Active	31
 140	0	8006	0	K0012	Umesh Sahu	Plumb	January	2022	Active	30
-208	0	1315	0	K0015	Jayachithra.R	Nurse	January	2022	Active	
 345	0	1458		K0019	DHARMENDRA VISHWAKARMA	Carpe	January	2022	Active	36
 354	0	1461		K0020	MANMOHAN SINGH	Tptln	January	2022	Active	0
-381	0	1490		K0022	Tulsi Ram	AO	January	2022	Active	
 389	0	1500		K0024	Ravindra Singh Tomar	HardE	January	2022	Active	30
-415	0	2076		K0027	BITTU SHARMA	FOE	January	2022	Active	
 423	0	2081		K0032	Vishal Saxena	Facil	January	2022	Active	31
 424	0	1527		K0033	Rakesh Kumar Singh	ElecS	January	2022	Active	27
 425	0	1528		K0034	Ratish Kumar Jha	Store	January	2022	Active	31
 429	0	1532		K0035	Jitendra Mohan Mishra	PurOf	January	2022	Active	38
-438	0	2086		K0036	Sakshi Lakhani	Acc As	January	2022	Active	
-442	0	2020		N0212	Hemant Singh Rana	NetDe	January	2022	Active	
-443	0	89685		P8254	Rahul Singh Rana	NetDe	January	2022	Active	
+444	0	2088		K0037	Om Shankar	Accountant	January	2022	Active	31
+445	0	2087		K0038	Lakshit Popli	IT	January	2022	Active	31
+447	0	2089		K0040	Deepak Kumar	Store	January	2022	Active	31
+450	0	1548		K0041	Sanjana Sammi	Cashi	January	2022	Active	6
+457	0	1554		K0043	Divya Rawat	Admin	January	2022	Active	30
+458	0	1555		K0044	Shivam Shukla	Admin	January	2022	Active	31
+459	0	1556		K0045	Reena Singh	Admin	January	2022	Active	31
+460	0	1557		K0046	Yash Pal Singh	AO	January	2022	Active	31
+461	0	1558		K0047	Shikha	FOE	January	2022	Active	28
+462	0	1559		K0048	Poonam Ram	GraDe	January	2022	Active	21
+110	0	1354	0	O0002	Pooja	ActEx	January	2022	Active	31
+112	0	1355	0	O0003	Parul Bansal	Act Tr	January	2022	Active	31
+100	0	1356	0	O0004	Radhika Maheshwari	Act Tr	January	2022	Active	31
+103	0	1366	0	O0009	Pankaj Kumar	Act Tr	January	2022	Active	31
+109	0	1369	0	O0012	Neha Mittal	Act Tr	January	2022	Active	31
+118	0	1382	0	O0013	Payal Mittal	Act Tr	January	2022	Active	31
+104	0	1384	0	O0015	Sarika Mittal	Act Tr	January	2022	Active	31
 291	0	1408		U0002	Rajesh Guleria	Field	January	2022	Active	45.5
 292	0	1409		U0003	Madhu Seth	Field	January	2022	Active	0
 293	0	1410		U0004	Mustak Khan	Field	January	2022	Active	30
@@ -195,14 +196,12 @@ ProfileID	EmployeeID	Emp_Code	SystemNumber	AssignEmpCode	Name	Designation	Month	
 413	0	1525		X0060	Manisha Sangwan	Academic Advisor	January	2022	Active	31
 441	0	1543		X0061	ANIRUDH GUPTA	Couns	January	2022	Active	31
 236	0	9142	0	Y0005	Baldev Paswan	Drive	January	2022	Active	34
-237	0	9143	0	Y0006	Indrajeet	Drive	January	2022	Active	34
 241	0	9148	0	Y0010	Sumit Kumar Yadav	Super	January	2022	Active	32
 243	0	9151	0	Y0012	Alok Bharti	Field	January	2022	Active	0
 316	0	9159		Y0018	Sikander	Mecha	January	2022	Active	0
-317	0	9160		Y0019	Jagvir	Mecha	January	2022	Active	31
+317	0	9160		Y0019	Jagvir	Mecha	January	2022	Active	20
 340	0	9161		Y0020	Amit Kumar	ElecS	January	2022	Active	32
 341	0	9162		Y0021	Amit Kumar	Drive	January	2022	Active	31
-410	0	1522		Y0024	Kavinder Singh	Engin	January	2022	Active	
 419	0	2080		Y0025	Sahdev Paswan	Drive	January	2022	Active	34
-426	0	1529		Y0026	Ashok Balhara	Drive	January	2022	Active	
-428	0	1531		Y0027	Virender Singh	Drive	January	2022	Active	
+449	0	1547		Y0028	Indrajeet	Drive	January	2022	Active	34
+456	0	1553		Y0029	PUNIL BHARGAVA	Drive	January	2022	Active	26

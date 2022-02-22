@@ -17,17 +17,6 @@
             show_hide_attendies();
             meetinglist();
             getstafflist();
-          <%--  var binduserlistrows = '';
-            $('#<%=txt_person.ClientID %>').change(function () {
-                $('#bindstaff li').remove();
-                var selectedValues = $('#<%=txt_person.ClientID %> option:selected').text();
-                binduserlistrows += "<div class='direct-chat-msg' style='margin-top: 5px;margin-bottom: 5px;'>";
-                binduserlistrows += "<img class='direct-chat-img' src='../Img/user1-128x128.jpg' alt='Message User Image' />";
-                binduserlistrows += "<span class='direct-chat-name pull-left' style='padding-left: 15px;margin-top: 10px;'>" + selectedValues + "</span> <i class='fa fa-fw fa-trash' style='color: #F24E1E;float: right;padding-top: 10px;'></i><br /></div>";
-                $('#bindstaff').append(binduserlistrows);
-            });
-          --%>
-
             getcriteriaparentlist();
             todotasklist();
             $("#Addmeetingbtn").click(function () {
@@ -1954,7 +1943,6 @@ staffcriteria_selection:last-child{
             }
         }
       </script>
-
      <section id="keyindicatordiv" style="display:none;">
       <div class="callout callout-info titlediv ">
            <h4 id="keyindicatorname"></h4>
@@ -2088,8 +2076,7 @@ staffcriteria_selection:last-child{
 
 </div> </div> </div></div>
 
-            </div>
-            
+            </div>           
       <div class="row" id="naacfaqdiv" style="display:none">
                 <div class="col-md-8" style="padding-right:48px;">
                     <input type="hidden" id="faqhidenid" />
@@ -2147,7 +2134,7 @@ staffcriteria_selection:last-child{
     <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
                        <div class="form-group">
                 <label class="datastylelabel"> Name of value added course offered <img src="../Img/exclamation_small.svg" /></label>
-                  <input type="text" class="form-control" id="txtcourseoffered" placeholder="Eg: Introduction to Machine Learning" />
+                  <input type="text" class="form-control" name="txtcourseoffered" id="txtcourseoffered" placeholder="Eg: Introduction to Machine Learning" />
                 </div>
              
                   </div>
@@ -2275,7 +2262,7 @@ staffcriteria_selection:last-child{
 
 </div> </div> </div>
                </div>
-                   <div class="col-lg-8" id="naac_113_121_div" style="padding-right:48px; padding-left:0px;display:none">
+                <div class="col-lg-8" id="naac_113_121_div" style="padding-right:48px; padding-left:0px;display:none">
                  <div class="box box-primary direct-chat direct-chat-primary">
 
 <div class="box-body">
@@ -2354,6 +2341,80 @@ staffcriteria_selection:last-child{
 
 </div> </div> </div>
                </div>
+              <div class="col-lg-8" id="nodata_div" style="padding-right:48px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+    <center>
+    <img src="../Img/Group 2.svg" style="height:250px;" />
+        <p style="font-weight: 700;padding-top: 15px;font-size: 20px;">Oops !</p>
+        <p style="color: #8A939F;font-size: 18px;">No data has been added</p>
+        <p style="color: #8A939F;font-size: 18px;">To this metric so far.</p>
+        </center>
+</div>
+
+</div> </div> </div>
+               </div>
+
+            <div class="col-lg-8" id="naac_141_div" style="padding-right:48px; padding-left:0px;display:none">
+                 <div class="box box-primary direct-chat direct-chat-primary">
+
+<div class="box-body">
+<div class="direct-chat-messages">
+<div class="direct-chat-msg">
+        <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                       <div class="form-group" id="main">
+                <label class="datastylelabel"><b>Q.</b> <span id="feedbackmcq" style="line-height: 24px;font-size:16px;font-weight:400"></span></label>
+                           <div class="col-lg-12" style="padding-left:0px;justify-content: space-between;display: flex;padding-left: 0px;align-items: center;padding-bottom: 10px;">
+                                     
+                                <div class="col-lg-4" style="padding-left:0px;">
+                                      <span class="file-field">
+                                         <input type="file" name="mcq_file" id="mcq_file" style="width: 15px;top: 2px;height: 20px; display:none" onchange="uploadmcqfile()"/>
+                                        </span>
+                                   <p style="padding-bottom: 5px;"><input type="checkbox" name="chkboxcount" id="studentchk" style="height:15px;width:15px;"/> 
+                                       <span style="font-weight:600;font-size: 18px;">Student</span></p>
+
+                                       <p style="padding-bottom: 5px;"> <input type="checkbox" name="chkboxcount" id="teacherchk" style="height:15px;width:15px;"/> 
+                                  <span style="font-weight:600;font-size: 18px;">Teachers</span></p>
+
+                                            <p style="padding-bottom: 5px;"> <input type="checkbox" name="chkboxcount" id="employerchk" style="height:15px;width:15px;"/> 
+                                       <span style="font-weight:600;font-size: 18px;">Employers</span></p>
+                                       <p style="padding-bottom: 5px;"> <input type="checkbox" name="chkboxcount" id="alumnichk" style="height:15px;width:15px;"/>
+                                       <span style="font-weight:600;font-size: 18px;">Alumni</span></p>
+                                </div>  
+                                 <div class="col-lg-4" style="padding-left:0px;">
+                                     <div id="stulink" style="height: 30px;padding-bottom: 5px;width:150px;"></div>
+                                     <div id="teachlink" style="height: 30px;padding-bottom: 5px;width:150px;"></div>
+                                     <div id="emplink" style="height: 30px;padding-bottom: 5px;width:150px;"></div>
+                                     <div id="alumlink" style="height: 30px;padding-bottom: 5px;width:150px;"></div>
+                                     </div>
+                                    <div class="col-lg-4" style="padding-left:0px;">
+                                            <p style="padding-bottom: 5px;">
+                                                <input type="radio" name="radio" id="select_1" style="height:15px;width:15px;" disabled="disabled"/>
+                                                <span style="font-weight:600;font-size: 18px;">All 4 of the above</span></p>
+                                           <p style="padding-bottom: 5px;"> <input type="radio" name="radio" id="select_2" style="height:15px;width:15px;" disabled="disabled"/>
+                                                <span style="font-weight:600;font-size: 18px;">Any 3 of the above</span></p>
+                                            <p style="padding-bottom: 5px;">
+                                                <input type="radio" name="radio" id="select_3" style="height:15px;width:15px;" disabled="disabled"/> 
+                                                <span style="font-weight:600;font-size: 18px;">Any 2 of the above</span></p>
+                                           <p style="padding-bottom: 5px;">
+                                                <input type="radio" name="radio" id="select_4" style="height:15px;width:15px;" disabled="disabled"/>
+                                                <span style="font-weight:600;font-size: 18px;">Any 1 of the above</span></p>
+
+                                         </div>
+                               
+                           </div>
+             
+
+                </div>
+             
+                  </div>
+</div>
+
+</div> </div> </div>
+               </div>
                <div class="col-lg-8" id="Qualitative" style="padding-right:24px; padding-left:0px;display:none">
                  <div class="box box-primary direct-chat direct-chat-primary">
 
@@ -2374,7 +2435,7 @@ staffcriteria_selection:last-child{
 </div> </div> </div>
                </div>
                 <div class="col-lg-4" style="padding-right:0px; padding-left:0px; display:none" id="fileupload">
-                  <div class="box box-primary direct-chat direct-chat-primary">
+                  <div class="box box-primary direct-chat direct-chat-primary" style="height: 400px;padding-right: 0px;padding-left: 0px; overflow-y: scroll;">
 
 <div class="box-body">
 <div class="direct-chat-messages">
@@ -2384,7 +2445,9 @@ staffcriteria_selection:last-child{
                 <label class="datastylelabel">Link to relevant documents <img src="../Img/exclamation_small.svg" /></label>
                   <input type="text" class="form-control" id="txt_linktodocument" placeholder="Eg: https://testing.pdf" />
                 </div>
-             
+             <div class="col-lg-12" style="padding-left:0px;padding-right:0px;padding-bottom: 15px;" id="linkshow">
+
+              </div>
                   </div>
      <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
                        <div class="form-group">
@@ -2404,7 +2467,8 @@ staffcriteria_selection:last-child{
      <div class="msg" style="display:none"></div>
 </div>
 </div>
-           </div> <div class="col-lg-12" style="padding-left:0px;padding-right:0px;height:168px" id="filelistshow">
+           </div> 
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;" id="filelistshow">
 
                   </div>
     </div>
@@ -2412,6 +2476,8 @@ staffcriteria_selection:last-child{
     </div>
     </div>
                   </div>
+
+               
             <div class="col-lg-8" id="datalist" style="padding-left:0px;padding-right:48px;display:none">
                  <div class="accordion md-accordion" id="accordionEx3" style="overflow-x: hidden; overflow-y: scroll;height: 350px;" role="tablist" aria-multiselectable="true">
                       
@@ -2447,5 +2513,6 @@ staffcriteria_selection:last-child{
             </div>
         </div>
     </div>
+
 </asp:Content>
 

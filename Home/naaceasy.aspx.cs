@@ -562,7 +562,10 @@ public partial class Home_naaceasy : System.Web.UI.Page
                  {
                      cmd.Parameters.AddWithValue("@Type", "qualitative");
                  }
-           
+                 else if (metrictype == "mcq")
+                 {
+                     cmd.Parameters.AddWithValue("@Type", "mcq");
+                 }
                  using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                  {
                      DataSet ds = new DataSet();
@@ -622,7 +625,7 @@ public partial class Home_naaceasy : System.Web.UI.Page
          }
 
      }
-     
+      [WebMethod]
     public static string removefile()
      {
          try
@@ -645,4 +648,132 @@ public partial class Home_naaceasy : System.Web.UI.Page
              return "Error";
          }
      }
+
+      [WebMethod]
+      public static string insertlink(string dataid,string metricid,string linkval)
+      {
+
+          string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+          using (SqlConnection con = new SqlConnection(constr))
+          {
+              using (SqlCommand cmd = new SqlCommand("sp_metriclinkfile", con))
+              {
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  cmd.Parameters.AddWithValue("@type", "insert");
+                  cmd.Parameters.AddWithValue("@dataid", dataid);
+                  cmd.Parameters.AddWithValue("@metricid", metricid);
+                  cmd.Parameters.AddWithValue("@filelink", linkval);
+                  cmd.Connection = con;
+                  con.Open();
+                  cmd.ExecuteNonQuery();
+                  con.Close();
+              }
+          }
+          return "success";
+      }
+      [WebMethod]
+      public static string filelinklist(string id)
+      {
+
+          string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+          using (SqlConnection con = new SqlConnection(constr))
+          {
+              using (SqlCommand cmd = new SqlCommand("sp_metriclinkfile", con))
+              {
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  cmd.Parameters.AddWithValue("@type", "list");
+                  cmd.Parameters.AddWithValue("@dataid", id);
+                  cmd.Connection = con;
+                  using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                  {
+                      DataSet ds = new DataSet();
+                      sda.Fill(ds);
+                      return ds.GetXml();
+                  }
+              }
+          }
+
+      }
+      [WebMethod]
+      public static string deletelink(string id)
+      {
+          try
+          {
+              string constr = "";
+              SqlCommand cmd;
+              constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+              SqlConnection con = new SqlConnection(constr);
+              cmd = new SqlCommand("sp_metriclinkfile", con);
+              cmd.CommandType = CommandType.StoredProcedure;
+              cmd.Connection = con;
+              cmd.Parameters.AddWithValue("@fileid", id);
+              cmd.Parameters.AddWithValue("@type", "delete");
+              con.Open();
+              cmd.ExecuteNonQuery();
+              con.Close();
+              return "success";
+          }
+          catch (Exception ac)
+          {
+              return "Error";
+          }
+
+      }
+
+      [WebMethod]
+      public static string removelink()
+      {
+          try
+          {
+              string constr = "";
+              SqlCommand cmd;
+              constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+              SqlConnection con = new SqlConnection(constr);
+              cmd = new SqlCommand("sp_metriclinkfile", con);
+              cmd.CommandType = CommandType.StoredProcedure;
+              cmd.Connection = con;
+              cmd.Parameters.AddWithValue("@type", "removefile");
+              con.Open();
+              cmd.ExecuteNonQuery();
+              con.Close();
+              return "success";
+          }
+          catch (Exception ac)
+          {
+              return "Error";
+          }
+      }
+
+      [WebMethod]
+      public static string getmcqlist(string id,string title)
+      {
+
+          string constr = ConfigurationManager.ConnectionStrings["myconnectionstring"].ConnectionString;
+          using (SqlConnection con = new SqlConnection(constr))
+          {
+              using (SqlCommand cmd = new SqlCommand("sp_mcqmanage", con))
+              {
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  if (title == "non")
+                  {
+                      cmd.Parameters.AddWithValue("@type", "list");
+                      cmd.Parameters.AddWithValue("@metricid", id);
+                  }
+                  else
+                  {
+                      cmd.Parameters.AddWithValue("@type", "delete");
+                      cmd.Parameters.AddWithValue("@mcqid", id);
+                  }
+                  cmd.Connection = con;
+                  using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                  {
+                      DataSet ds = new DataSet();
+                      sda.Fill(ds);
+                      return ds.GetXml();
+                  }
+              }
+          }
+
+      }
+
 }

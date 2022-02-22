@@ -100,7 +100,7 @@ font-style: normal;
   <div class="row">
       <div class="col-lg-3 naacheaderpadding">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <span class="logo-lg" style="float:left"><span class="naactitle">Naac</span> <span class="easytitle">Easy</span></span>
     </a>
 </div>
@@ -215,7 +215,7 @@ font-style: normal;
                <img src="../Img/home_deselected_small.svg" id="smalldashboardimg" class="showsmalldevice"/> <span class="dashmargin">Dashboard</span>
           </a>      
         </li>
-        <li style="display:none">
+        <li>
           <a onclick="visiblemeetingtab();"  class="topmenu" id="meetingnoteli">
            <img src="../Img/notes_deselected.svg" / id="meetingnoteimg" class="showlgdevice"/>
              <img src="../Img/todo_deselected_small.svg" id="smallnotesimg" class="showsmalldevice" />    <span class="dashmargin">Meeting Notes</span>
@@ -227,6 +227,7 @@ font-style: normal;
            <img src="../Img/todo_deselected_small.svg" id="smalltodoimg" class="showsmalldevice" /> <span class="dashmargin">To Do Task</span>
           </a>      
         </li>
+             
           <li class="header">CRITERIA</li>
          <li class="treeview">
              <div style="height: 470px; overflow-y: auto;overflow-x: hidden;">
@@ -297,8 +298,6 @@ font-style: normal;
             <script src="../NaacCustomFiles/js/select2.full.min.js"></script>
 <script src="../NaacCustomFiles/js/fastclick.js"></script>
 <script src="../NaacCustomFiles/js/adminlte.min.js"></script>
-<%-- <script src="../NaacCustomFiles/js/daterangepicker.js"></script>
-<script src="../NaacCustomFiles/js/bootstrap-datepicker.min.js"></script>--%>
             <script src="../NaacCustomFiles/js/ckeditor.js"></script>
 <script src="../NaacCustomFiles/js/jquery.slimscroll.min.js"></script>   
 

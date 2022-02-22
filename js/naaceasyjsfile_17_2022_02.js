@@ -1,51 +1,6 @@
-﻿var getcheckboxid = "";
-var countCheckedCheckboxes = "";
-$(document).ready(function () {
-  
-    //var fileSelectEle = document.getElementById('mcq_file');
-    //fileSelectEle.onclick = charge;
-    //function charge() {
-    //    document.body.onfocus = checkOnCancel;
-    //}
-    //function checkOnCancel() {
-    //    if (fileSelectEle.value.length == 0) {
-    //        if (countCheckedCheckboxes == 4) {
-    //            $("#select_1").prop("checked", false);
-    //        }
-    //        else if (countCheckedCheckboxes == 3) {
-    //            $("#select_2").prop("checked", false);
-    //        }
-    //        else if (countCheckedCheckboxes == 2) {
-    //            $("#select_3").prop("checked", false);
-    //        }
-    //        else if (countCheckedCheckboxes == 1) {
-    //            $("#select_4").prop("checked", false);
-    //        }
-
-    //        if (getcheckboxid == "1") {
-
-    //            $("#studentchk").prop("checked", false);
-    //        }
-    //        else if (getcheckboxid == "2") {
-
-    //            $("#teacherchk").prop("checked", false);
-    //        }
-    //        else if (getcheckboxid == "3") {
-
-    //            $("#employerchk").prop("checked", false);
-    //        }
-    //        else if (getcheckboxid == "4") {
-
-    //            $("#alumnichk").prop("checked", false);
-    //        }
-
-           
-    //    }
-    //    document.body.onfocus = null;
-    //}
-
+﻿$(document).ready(function () {
     var $checkboxes = $('input[name="chkboxcount"]');
-
+    var countCheckedCheckboxes="";
     $checkboxes.change(function () {
         countCheckedCheckboxes = $checkboxes.filter(':checked').length;
         if (countCheckedCheckboxes == 4) {
@@ -61,50 +16,40 @@ $(document).ready(function () {
         else if (countCheckedCheckboxes == 1) {
             $("#select_4").prop("checked", true);
         }
-        else {
-            $("#select_1").prop("checked", false);
-            $("#select_2").prop("checked", false);
-            $("#select_3").prop("checked", false);
-            $("#select_4").prop("checked", false);
-        }
     });
    
     //var x = checkboxes.filter(':checked').length;
    
     $("#studentchk").click(function () {
         if (this.checked) {
-            getcheckboxid = "1";
-            $('#mcq_file').trigger('click');
-          
+            $("#studiv").show();
         }
         else {
-
+            $("#studiv").hide();
         }
     });
     $("#teacherchk").click(function () {
         if (this.checked) {
-            $('#mcq_file').trigger('click');
-            getcheckboxid = "2";
+            $("#teacdiv").show();
         }
         else {
+            $("#teacdiv").hide();
         }
     });
     $("#employerchk").click(function () {
         if (this.checked) {
-            getcheckboxid = "3";
-            $('#mcq_file').trigger('click');
+            $("#emp_div").show();
         }
         else {
-           
+            $("#emp_div").hide();
         }
     });
     $("#alumnichk").click(function () {
         if (this.checked) {
-             getcheckboxid = "4";
-            $('#mcq_file').trigger('click');
+            $("#alumn_div").show();
         }
         else {
-         
+            $("#alumn_div").hide();
         }
     });
 
@@ -112,12 +57,12 @@ $(document).ready(function () {
     var getlastcarddiv = "";
  //  ();loder
     //   filelist();
-    $("#meetingnoteimg").attr("src", "../img/notes_selected.svg");
-    $("#smallnotesimg").attr("src", "../img/notes_selected_small.svg");
-    $("#meetingnoteli").addClass("selectedmenu");
-    $("#meetingtoptitlediv").show();
-    $("#meetinglistdiv").show();
-    $("#meetinglistsec").show();
+    //$("#meetingnoteimg").attr("src", "../img/notes_selected.svg");
+    //$("#smallnotesimg").attr("src", "../img/notes_selected_small.svg");
+    //$("#meetingnoteli").addClass("selectedmenu");
+    //$("#meetingtoptitlediv").show();
+    //$("#meetinglistdiv").show();
+    //$("#meetinglistsec").show();
     //$("#lidashboard").addClass("addbackground");
 });
 
@@ -271,6 +216,8 @@ function editbutton() {
         $("#naac_132_133_div").hide();
         $("#naac_134_div").hide();
         $("#Qualitative").hide();
+        
+
     }
     else if (getmetric == "1.1.1" || getmetric == "1.3.1")
     {
@@ -282,7 +229,6 @@ function editbutton() {
         $("#naac_141").hide();
         $("#txt_qualitative").attr("disabled", false);
     }
-
     $("#update_metricdata").show();
     $("#edit_metricdata").hide();
 }
@@ -412,22 +358,6 @@ function showmetricadddiv()
         $("#txt_112_122_revision").val("0").attr("disabled", false);
         $("#txt_112_122_content").val("").attr("disabled", false);
 
-        $("#txtcourseoffered").val("").attr("disabled", false);
-        $("#txt_coursecode").val("").attr("disabled", false);
-        $("#txt_courseduration").val("").attr("disabled", false);
-        $("#txt_year").val("").attr("disabled", false);
-        $("#txt_timeoffered").val("").attr("disabled", false);
-        $("#txt_stuenrolled").val("").attr("disabled", false);
-        $("#txt_completing").val("").attr("disabled", false);
-
-        $("#txt_113_121_name").val("").attr("disabled", false);
-        $("#txt_113_121_code").val("").attr("disabled", false);
-        $("#txt_113_121_intro").val("0").attr("disabled", false);
-        $("#txt_113_121_content").val("").attr("disabled", false);
-
-        $("#dataid").val("0");
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
        
     }
     else if(getmetricdiv == '1.3.2' || getmetricdiv == '1.3.3')
@@ -445,15 +375,6 @@ function showmetricadddiv()
         $("#fileupload").show();
         $("#datalist").hide();
 
-        $("#txt_linktodocument").val("").attr("disabled", false);
-        $("#txt_112_122_name").val("").attr("disabled", false);
-        $("#txt_112_122_code").val("").attr("disabled", false);
-        $("#txt_112_122_intro").val("").attr("disabled", false);
-        $("#txt_112_122_status").val("0").attr("disabled", false);
-        $("#txt_112_122_yearimp").val("0").attr("disabled", false);
-        $("#txt_112_122_revision").val("0").attr("disabled", false);
-        $("#txt_112_122_content").val("").attr("disabled", false);
-
         $("#txtcourseoffered").val("").attr("disabled", false);
         $("#txt_coursecode").val("").attr("disabled", false);
         $("#txt_courseduration").val("").attr("disabled", false);
@@ -462,14 +383,7 @@ function showmetricadddiv()
         $("#txt_stuenrolled").val("").attr("disabled", false);
         $("#txt_completing").val("").attr("disabled", false);
 
-        $("#txt_113_121_name").val("").attr("disabled", false);
-        $("#txt_113_121_code").val("").attr("disabled", false);
-        $("#txt_113_121_intro").val("0").attr("disabled", false);
-        $("#txt_113_121_content").val("").attr("disabled", false);
-
-        $("#dataid").val("0");
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
+      
      
     }
     else if(getmetricdiv == '1.1.3' || getmetricdiv == '1.2.1')
@@ -488,31 +402,11 @@ function showmetricadddiv()
         $("#fileupload").show();
         $("#datalist").hide();
 
-        $("#txt_linktodocument").val("").attr("disabled", false);
-        $("#txt_112_122_name").val("").attr("disabled", false);
-        $("#txt_112_122_code").val("").attr("disabled", false);
-        $("#txt_112_122_intro").val("").attr("disabled", false);
-        $("#txt_112_122_status").val("0").attr("disabled", false);
-        $("#txt_112_122_yearimp").val("0").attr("disabled", false);
-        $("#txt_112_122_revision").val("0").attr("disabled", false);
-        $("#txt_112_122_content").val("").attr("disabled", false);
-
-        $("#txtcourseoffered").val("").attr("disabled", false);
-        $("#txt_coursecode").val("").attr("disabled", false);
-        $("#txt_courseduration").val("").attr("disabled", false);
-        $("#txt_year").val("").attr("disabled", false);
-        $("#txt_timeoffered").val("").attr("disabled", false);
-        $("#txt_stuenrolled").val("").attr("disabled", false);
-        $("#txt_completing").val("").attr("disabled", false);
-
         $("#txt_113_121_name").val("").attr("disabled", false);
         $("#txt_113_121_code").val("").attr("disabled", false);
         $("#txt_113_121_intro").val("0").attr("disabled", false);
         $("#txt_113_121_content").val("").attr("disabled", false);
 
-        $("#dataid").val("0");
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
     }
     else if (getmetricdiv == '1.3.4') {
         $("#Qualitative").hide();
@@ -527,28 +421,10 @@ function showmetricadddiv()
         $("#nodata_div").hide();
         $("#fileupload").show();
         $("#datalist").hide();
-
-        $("#txt_linktodocument").val("").attr("disabled", false);
-        $("#txt_112_122_name").val("").attr("disabled", false);
-        $("#txt_112_122_code").val("").attr("disabled", false);
-        $("#txt_112_122_intro").val("").attr("disabled", false);
-        $("#txt_112_122_status").val("0").attr("disabled", false);
-        $("#txt_112_122_yearimp").val("0").attr("disabled", false);
-        $("#txt_112_122_revision").val("0").attr("disabled", false);
-        $("#txt_112_122_content").val("").attr("disabled", false);
-
         $("#txt_134_name").val("").attr("disabled", false);
         $("#txt_134_code").val("").attr("disabled", false);
         $("#txt_134_student").val("").attr("disabled", false);
 
-        $("#txt_113_121_name").val("").attr("disabled", false);
-        $("#txt_113_121_code").val("").attr("disabled", false);
-        $("#txt_113_121_intro").val("0").attr("disabled", false);
-        $("#txt_113_121_content").val("").attr("disabled", false);
-
-        $("#dataid").val("0");
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
     }
     else if (getmetricdiv == '1.4.1') {
         $("#Qualitative").hide();
@@ -563,9 +439,7 @@ function showmetricadddiv()
         $("#nodata_div").hide();
         $("#fileupload").show();
         $("#datalist").hide();
-        $("#dataid").val("0");
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
+
     }
     else if (getmetricdiv == '1.1.1' || getmetricdiv == "1.3.1")
     {
@@ -581,8 +455,6 @@ function showmetricadddiv()
         $("#Qualitative").show();
         $("#fileupload").show();
         $("#datalist").hide();
-        $('#filelistshow div').remove();
-        $('#linkshow div').remove();
     }
 }
 function discardbtn()
@@ -600,7 +472,7 @@ function discardbtn()
 
     var getmetrictitle = $("#metricname").text();
     var getmetric = getmetrictitle.substring(7, 12);
-    if (getmetric == '1.1.2' || getmetric == '1.2.2' || getmetric == '1.3.2' || getmetric == '1.3.3' || getmetric == '1.2.1' || getmetric == '1.1.3' || getmetric == '1.3.4' ) {
+    if (getmetric == '1.1.2' || getmetric == '1.2.2' || getmetric == '1.3.2' || getmetric == '1.3.3' || getmetric == '1.2.1' || getmetric == '1.1.3') {
         metricid = $("#metricid").text();
         getmetricdatalist(metricid,'list');
         $("#datalist").show();
@@ -796,12 +668,10 @@ function datatab() {
     var getmetrictitle = $("#metricname").text();
     var getmetric = getmetrictitle.substring(7, 12);
     if (getmetric == '1.1.2' || getmetric == '1.2.2' || getmetric == '1.3.2' || getmetric == '1.3.3' || getmetric == '1.1.3' || getmetric == '1.2.1' || getmetric == '1.3.4') {
-      
         metricid = $("#metricid").text();
         getmetricdatalist(metricid,'list');
     }
     else if (getmetric == '1.4.1') {
-     
         metricid = $("#metricid").text();
         getmetricdatalist(metricid, 'mcq');
         $("#metricadddiv").text(getmetric);
@@ -947,6 +817,163 @@ function updatemeeting(meetingid) {
 
 }
 
+var checkbox;
+function dototask(sno) {
+
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/gettodotask",
+        data: '{id:"' + sno + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var xmlDoc = $.parseXML(response.d);
+            var xml = $(xmlDoc);
+            var customers = xml.find("Table");
+            var rows = '';
+            $.each(customers, function () {
+                $('#tasklist li').remove();
+                $('#pendingdiv').show();
+
+                var task = $(this).find("taskname").text();
+                var taskstatus = $(this).find("taskstatus").text();
+                var assignto = $(this).find("assignto").text();
+                var assigndate = $(this).find("assigndate").text();
+                var criterianame = $(this).find("Menuname").text();
+                var enddate = $(this).find("enddate").text();
+                var todoremark = $(this).find("todoremark").text();
+                var tasksno = $(this).find("sno").text();
+
+                checkbox = "<label class='form-check-label' style='color:#bd1c1c'><input class='checkbox' type='checkbox' id='filechecked' onclick='ShowHideDiv(" + tasksno + ")'> &nbsp; " + task + "";
+
+                rows += "<li> <div class='form-check'><span class='mytooltip tooltip-effect-5'><span class='tooltip-item'>" + checkbox + "<i class='input-helper'></i><span style='color:green'> (" + criterianame + ")</span></span></label><span class='tooltip-content clearfix'><span class='tooltip-text'><span><b>Task Name :</b> " + task + " </span><br><span><b> Assign To :</b> " + assignto + " </span><br><span><b> Assign Date :</b> " + assigndate + "</span><br><span><b> Enddate : </b>" + enddate + "</span><br><span><b> Reamrk : </b>" + todoremark + "</span></span></span></span></div><span style='color: #337ab7;font-size: 15px;margin-left: auto !important;'>(" + assignto + ")</span><i class='fas fa-edit' style='margin-top: 5px;margin-left: 5px !important; font-size: 10px;' onclick='gettodoedit(" + tasksno + ")'></i><i class='remove mdi mdi-close-circle-outline' style='margin-left:5px !important;' onclick='deletetodo(" + tasksno + ")'></i></li>";
+            });
+            if (rows == "") {
+                $('#tasklist li').remove();
+                $('#pendingdiv').hide();
+            }
+            else {
+                $('#tasklist').append(rows);
+            }
+
+        },
+        error: function (response) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+        }
+    });
+
+}
+
+
+function deletemeeting(meetingid) {
+    var alert = confirm("Are you sure want to delete this meeting?");
+    if (alert) {
+        var id = $("#criteriaid").text();
+        $.ajax({
+            type: "POST",
+            url: "index.aspx/deletemeeting",
+            data: '{id:"' + meetingid + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var result = response.d;
+                if (result == "success") {
+                    getmeeting(id);
+
+                    dototask(id);
+                    getcompetionssr(id);
+                    getfaq(id);
+                    dotocomtask(id);
+                   
+                }
+            },
+            error: function (response) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+    }
+    else {
+
+        return false;
+
+    }
+}
+function deletetodo(meetingid) {
+    var alert = confirm("Are you sure want to delete this Task?");
+    if (alert) {
+        var id = $("#criteriaid").text();
+        $.ajax({
+            type: "POST",
+            url: "index.aspx/deletetodo",
+            data: '{id:"' + meetingid + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var result = response.d;
+                if (result == "success") {
+                    getmeeting(id);
+                    dototask(id);
+                    getcompetionssr(id);
+                    getfaq(id);
+                
+                    dotocomtask(id);
+                }
+            },
+            error: function (response) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+    }
+    else {
+
+        return false;
+
+    }
+}
+function getmeeting(sno) {
+
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/getmeetingtask",
+        data: '{id:"' + sno + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var xmlDoc = $.parseXML(response.d);
+            var xml = $(xmlDoc);
+            var customers = xml.find("Table");
+            var rows = '';
+            $.each(customers, function () {
+                $('#meetinglist li').remove();
+                $('#notes').show();
+
+                var meetingname = $(this).find("meetingname").text();
+                var contactperson = $(this).find("contactperson").text();
+                var Menuname = $(this).find("Menuname").text();
+                var username = $(this).find("name").text();
+                var meetingid = $(this).find("meetingid").text();
+                var linksno = $(this).find("sno").text();
+                rows += "<li style='border-radius: 7px;color: #004085;border-color: #cce5ff;background-color: #cce5ff;margin-bottom: 5px;'> <div class='form-check'><label class='form-check-label' onclick='getmeetingdetails(" + linksno + ")'>" + meetingname + "<span style='color:green'> (" + Menuname + ") </span><span style='color:green'> (" + username + ") </span></label></div><i class='remove mdi mdi-close-circle-outline' onclick='deletemeeting(" + linksno + ")'></i></li>";
+            });
+            if (rows == "") {
+                $('#meetinglist li').remove();
+                $('#notes').hide();
+            }
+            else {
+                $('#meetinglist').append(rows);
+            }
+
+        },
+        error: function (response) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+        }
+    });
+
+}
 function getcompetionssr(criteriaid) {
     loder();
     $.ajax({
@@ -1030,6 +1057,7 @@ function getmetricdatalist(metricid,type) {
                      programname = $(this).find("coursename_113").text();
                      dataid = $(this).find("dataid").text();
                 }
+               
                 rows += "<div class='card'><div role='tab' id='dataheading" + dataid + "'><a class='collapsed ssrheading' style='cursor: pointer;' data-toggle='collapse' data-parent='#accordionEx3' onclick='getmetridatavalue(" + dataid + ")'>";
                 rows += "<h5 class='mb-0' id='datah5_" + dataid + "'>" + programname + "</i></h5><img id='dataimgclass_" + dataid + "' src='../img/chevron.down.svg'/></a></div>";
                 rows += "</div>";
@@ -1050,7 +1078,6 @@ function getmetricdatalist(metricid,type) {
             $("#datalist").show();
             $("#update_metricdata").hide();
             $("#Qualitative").hide();
-            
             }
             else if (customers.length > 0 && type == "qualitative") {
                 $.each(customers, function () {
@@ -1074,12 +1101,11 @@ function getmetricdatalist(metricid,type) {
                     $("#feedbackmcq").text($(this).find("mcqtion").text());
                   //  $("#txt_qualitative").val($(this).find("qualitative").text()).attr("disabled", true);
                     var dataid = $(this).find("dataid").text();
-                    getmcqfile(metricid);
                     getmetricuploadlist(dataid);
                     getmetriclinklist(dataid)
                     $("#fileupload").show();
                     $("#naac_141_div").show();
-                    $("#edit_metricdata").hide();
+                    $("#edit_metricdata").show();
                     $("#update_metricdata").hide();
                     $("#dataid").val($(this).find("dataid").text());
                 });
@@ -1444,6 +1470,107 @@ function getshadow(faqsno)
     }
     localStorage.setItem("localfaqid", faqsno);
 }
+function dotocomtask(sno) {
+
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/getcomtodotask",
+        data: '{id:"' + sno + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var xmlDoc = $.parseXML(response.d);
+            var xml = $(xmlDoc);
+            var customers = xml.find("Table");
+            var rows = '';
+            $.each(customers, function () {
+                $('#completelist li').remove();
+                //$('#completelist li').remove();
+                $('#completediv').show();
+                var task = $(this).find("taskname").text();
+                var taskstatus = $(this).find("taskstatus").text();
+                var assignto = $(this).find("assignto").text();
+                var tasksno = $(this).find("sno").text();
+                var criterianame = $(this).find("Menuname").text();
+                if (taskstatus == 1) {
+                    //checkbox = "<input type='checkbox' checked='checked' id='filechecked' onclick='ShowHideDiv(" + tasksno + ")' /> <span style='color:green'>" + task + "</span>";
+                    checkbox = "<label class='form-check-label_com' style='color:#19661c'><input type='checkbox' checked='checked' id='filechecked' onclick='ShowHideDiv(" + tasksno + ")'> &nbsp; " + task + "";
+                }
+
+                rows += "<li> <div class='form-check'>" + checkbox + "<i class='input-helper'></i><span style='color:green'> (" + criterianame + ")</span></label></div><span style='color: #337ab7;font-size: 15px;margin-left: auto !important;'>(" + assignto + ")</span></li>";
+            });
+            if (rows == "") {
+                $('#completelist li').remove();
+                $('#completediv').hide();
+            }
+            else {
+                $('#completelist').append(rows);
+            }
+
+        },
+        error: function (response) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+        }
+    });
+
+}
+function ShowHideDiv(checkid) {
+    var treesno = document.getElementById("treeid").value;
+    var treename = document.getElementById("treename").value;
+    var checkbox = document.getElementById('filechecked');
+    if (checkbox.checked != false) {
+        $.ajax({
+            type: "POST",
+            url: "index.aspx/updatetodo",
+            data: '{id:"' + checkid + '",taskstatus:"' + "1" + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                // alert("Record Update Successfully...!");
+                //$("#tasklist").find("li").empty();
+                $('#tasklist li').remove();
+                $('#completelist li').remove();
+                someFunction(treesno, treename);
+                $("#home").removeClass("active in");
+                $("#hometab").removeClass("naactabul_li");
+                $("#todo").addClass("active in");
+                $("#todotab").addClass("active");
+            },
+            error: function (response) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "index.aspx/updatetodo",
+            data: '{id:"' + checkid + '",taskstatus:"' + "0" + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                //   alert("Record Update Successfully...!");
+                $('#completelist li').remove();
+                $('#tasklist li').remove();
+                someFunction(treesno, treename);
+                $("#home").removeClass("active in");
+                $("#hometab").removeClass("naactabul_li");
+                $("#todo").addClass("active in");
+                $("#todotab").addClass("active");
+            },
+            error: function (response) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+    }
+
+
+}
+
 $(document).ready(function () {
     $.ajax({
         url: "../naaceasymenu.ashx",
@@ -1619,12 +1746,90 @@ function someFunction(id, text, menuparentid) {
                 }
             });
     }
+    
+
+
+    $("#ddl_datacriteria option[value=" + id + "]").attr('selected', 'selected');
+
+    $("#criteriapath").text(text);
+
+    $('#dashboardtab').hide();
+   
+    dototask(id);
+    getmeeting(id);
+
+    dotocomtask(id);
+    var hiddendivvalue = $('#hidediv').val();
+    if (id != "") {
+        if (hiddendivvalue == "") {
+            //  $('#welcomdiv').hide();
+            $('#' + id + '_div').show();
+            $('#' + id + '_divsop').show();
+            $('#' + id + '_divguide').show();
+            $("#criterianame").text("");
+            $("#criterianame").text(text);
+            $("#meetingcriterianame").text("");
+            $("#meetingcriterianame").text(text);
+            $("#criteriaid").text(" ");
+            $("#criteriaid").text(id);
+
+
+        }
+        else if (hiddendivvalue == id) {
+            //   $('#welcomdiv').hide();
+            $('#' + id + '_div').show();
+            $('#' + id + '_divsop').show();
+            $('#' + id + '_divguide').show();
+            $("#criterianame").text("");
+            $("#criterianame").text(text);
+            $("#meetingcriterianame").text("");
+            $("#meetingcriterianame").text(text);
+            $("#criteriaid").text(" ");
+            $("#criteriaid").text(id);
+        }
+        else {
+            //   $('#welcomdiv').hide();
+            $('#' + id + '_div').show();
+            $('#' + id + '_divsop').show();
+            $('#' + id + '_divguide').show();
+            $("#criterianame").text("");
+            $("#criterianame").text(text);
+            $("#meetingcriterianame").text("");
+            $("#meetingcriterianame").text(text);
+            $("#criteriaid").text(" ");
+            $("#criteriaid").text(id);
+            $('#' + hiddendivvalue + '_div').hide();
+            $('#' + hiddendivvalue + '_divsop').hide();
+            $('#' + hiddendivvalue + '_divguide').hide();
+        }
+    }
+    else {
+        var lastdiv = localStorage.getItem("lastopendiv");
+        if (lastdiv == null) {
+            $('.article').hide();
+        }
+        else {
+            $("#criterianame").text("");
+            $("#criterianame").text(text);
+            $("#meetingcriterianame").text("");
+            $("#meetingcriterianame").text(text);
+
+            $("#criteriaid").text(" ");
+            $("#criteriaid").text(id);
+            $('#' + hiddendivvalue + '_div').hide();
+            $('#' + hiddendivvalue + '_divsop').hide();
+            $('#' + hiddendivvalue + '_divguide').hide();
+
+        }
+        //  $('#welcomdiv').show();
+    }
+    $("#hidediv").val(id);
+
 }
 function getmetricdetails(metricsno)
 {
     removefile();
     removelink();
-
     $('#filelistshow div').remove();
     $('#linkshow div').remove();
     
@@ -1638,7 +1843,6 @@ function getmetricdetails(metricsno)
     $("#naac_112_122_div").hide();
     $("#naac_134_div").hide();
     $("#naac_141_div").hide();
-    $("#Qualitative").hide();
     $("#naac_113_121_div").hide();
     $("#nodata_div").hide();
     $("#naac_132_133_div").hide();
@@ -1796,14 +2000,78 @@ function getkeymetriclist(keyid)
         }
     });
 }
+var wikiid = 0;
+$(function () {
+    $('[id*=a_btn]').bind('click', function () {
+        var row = $(this).closest('tr');
+        var id = $(row).find('.rid').html().trim();
+        var title = $(row).find('.rtitle').html().trim();
+        var wiki = $(row).find('.rwiki').html().trim();
+        wikiid = id;
+        //   $("#summernote").summernote("code", wiki);
+        $("#title").text(title);
+        $("#criterianame").text(title);
+        $("#meetingcriterianame").text(title);
+
+        $('#exampleModalCenter').modal('show');
+
+    });
+});
+
+function showMessage() {
+    //alert(wikiid);
+
+    var Details = {};
+    //     Details.details = $("#summernote").val();
+    Details.wikiid = wikiid;
+    var jsonData = JSON.stringify({
+        Details: Details
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "index.aspx/adddetails",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess,
+        error: OnErrorCall
+    });
+
+    function OnSuccess(response) {
+        var result = response.d;
+        if (result == "success") {
+
+            localStorage.setItem("lastopendiv", $('#hidediv').val());
+            //   var divvalue = $('#hidediv').val();
+            $('#exampleModalCenter').modal('hide');
+            location.reload();
+            $('#' + divvalue + '_div').show();
+        }
+
+    }
+    function OnErrorCall(response) {
+        alert("Failed in Updating Details.");
+    }
+}
+
+function getPath(a) {
+    var path = $(a).text();
+    var $parent = $(a).parents("li").eq(1).find("a:first");
+
+    if ($parent.length == 1) {
+        path = getPath($parent) + " > " + path;
+    }
+
+    return path;
+}
 $(document).ready(function () {
     $("#txt_linktodocument").change(function () {
-       
+        loder();
         var getdataid = $("#dataid").val();
         var metricidget = $("#metricid").text();
         var linktext = $("#txt_linktodocument").val();
-        if (linktext != "") {
-            loder();
+
         $.ajax({
             url: "naaceasy.aspx/insertlink",
             data: '{dataid:"' + getdataid + '",metricid:"' + metricidget + '",linkval:"' + linktext + '" }',
@@ -1813,10 +2081,8 @@ $(document).ready(function () {
             success: function (data) {
                 getmetriclinklist(getdataid);
                 stoploader();
-                var linktext = $("#txt_linktodocument").val("");
             }
         });
-        }
     });
 
 
@@ -1931,48 +2197,6 @@ $(document).ready(function () {
     });
 });
 
-function uploadmcqfile() {
-    loder();
-    var formData = new FormData();
-    var getdataid = $("#dataid").val();
-    var metricidget = $("#metricid").text();
-    var myfile = $('#mcq_file').val();
-    if (getcheckboxid == "1")
-    {
-
-        formData.append('filetitle', "Student");
-        $("#studentchk").attr("disabled", true);
-    }
-    else if (getcheckboxid == "2") {
-        formData.append('filetitle', "Teacher");
-        $("#teacherchk").attr("disabled", true);
-    }
-    else if (getcheckboxid == "3") {
-        formData.append('filetitle', "Employee");
-        $("#employerchk").attr("disabled", true);
-    }
-    else if (getcheckboxid == "4") {
-        formData.append('filetitle', "Alumni");
-        $("#alumnichk").attr("disabled", true);
-    }
-    formData.append('mcq_file', $('#mcq_file')[0].files[0]);
-    var id = metricidget;
-    formData.append('metricid', id);
-    formData.append('dataid', getdataid);
-    $.ajax({
-        url: "../mcqfilehandler.ashx",
-        data: formData,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
-            getmcqfile(metricidget);
-            $("#mcq_file").val("");
-            stoploader();
-        }
-    });
-
-}
 function uploaddatafile()
 {
     loder();
@@ -2019,7 +2243,6 @@ function uploaddatafile()
             $('.progress-bar-aqua').css('width', '0');
             getmetricuploadlist(getdataid);
             stoploader();
-            $("#fuUpload").val("");
 
         }
     });
@@ -2168,103 +2391,7 @@ function removefile() {
         });
    
 }
-function getmcqfile(metricid)
-{
-   
-    $.ajax({
-        type: "POST",
-        url: "naaceasy.aspx/getmcqlist",
-        data: '{id:"' + metricid + '",title:"non" }',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var xmlDoc = $.parseXML(response.d);
-            var xml = $(xmlDoc);
-            var customers = xml.find("Table");
-            var sturow = '';
-            var techrow = '';
-            var emprow = '';
-            var alurow = '';
-            $('#stulink a').remove();
-            $('#stulink img').remove();
-            $('#teachlink a').remove();
-            $('#teachlink img').remove();
-            $('#emplink a').remove();
-            $('#emplink img').remove();
-            $('#alumlink a').remove();
-            $('#alumlink img').remove();
-            $.each(customers, function () {
-                if (customers.length > 0) {
-                    loder();
-                    if (customers.length == 1) {
-                        $("#select_4").prop("checked", true);
-                    }
-                    else if(customers.length == 2)
-                    {
-                        $("#select_3").prop("checked", true);
-                    }
-                    else if(customers.length == 3){
-                        $("#select_2").prop("checked", true);
-                    }
-                    else if(customers.length == 4)
-                        {
-                        $("#select_1").prop("checked", true);
-                    }
-                    var filename = $(this).find("filename").text();
-                    var filetitle = $(this).find("filetitle").text();
-                    var mcqid = $(this).find("mcqid").text();
-                    var titleno = $(this).find("titleno").text();
-                    
-                    if (filetitle == "Student") {
-                        $("#studentchk").prop("checked", true);
-                        $("#studentchk").attr("disabled", true);
-                        $('#stulink a').remove();
-                        $('#stulink img').remove();
-                        sturow += "<a style='color: #2a85ff;font-size: 17px;text-decoration: underline;cursor: pointer;border-radius: 16PX;' href='../mcqfileupload/" + filename + "' target='_blank'><i class='fa fa-view'></i> View File </a><img src='../Img/trash.svg' style='float: right;cursor: pointer;width: 18px;' onclick='deletemcq(" + mcqid + "," + titleno + ")'>";
-                        $('#stulink').append(sturow);
 
-                    }
-                    else if (filetitle == "Teacher") {
-                        $("#teacherchk").prop("checked", true);
-                        $("#teacherchk").attr("disabled", true);
-                        $('#teachlink a').remove();
-                        $('#teachlink img').remove();
-                        techrow += "<a style='color: #2a85ff;font-size: 17px;text-decoration: underline;cursor: pointer;border-radius: 16PX;' href='../mcqfileupload/" + filename + "' target='_blank'><i class='fa fa-view'></i> View File </a><img src='../Img/trash.svg' style='float: right;cursor: pointer;width: 18px;' onclick='deletemcq(" + mcqid + "," + titleno + ")'>";
-                        $('#teachlink').append(techrow);
-                     }
-                     
-                    else if (filetitle == "Employee") {
-                        $("#employerchk").prop("checked", true);
-                        $("#employerchk").attr("disabled", true);
-                        $('#emplink a').remove();
-                        $('#emplink img').remove();
-                        emprow += "<a style='color: #2a85ff;font-size: 17px;text-decoration: underline;cursor: pointer;border-radius: 16PX;' href='../mcqfileupload/" + filename + "' target='_blank'><i class='fa fa-view'></i> View File </a><img src='../Img/trash.svg' style='float: right;cursor: pointer;width: 18px;' onclick='deletemcq(" + mcqid + "," + titleno + ")'>";
-                        $('#emplink').append(emprow);
-                    }
-                   
-                    else if (filetitle == "Alumni") {
-                        $("#alumnichk").prop("checked", true);
-                        $("#alumnichk").attr("disabled", true);
-                        $('#alumlink a').remove();
-                        $('#alumlink img').remove();
-                        alurow += "<a style='color: #2a85ff;font-size: 17px;text-decoration: underline;cursor: pointer;border-radius: 16PX;' href='../mcqfileupload/" + filename + "' target='_blank'><i class='fa fa-view'></i> View File </a><img src='../Img/trash.svg' style='float: right;cursor: pointer;width: 18px;' onclick='deletemcq(" + mcqid + "," + titleno + ")'>";
-                        $('#alumlink').append(alurow);
-                    }
-                    stoploader();
-                }
-                else {
-                  
-                }
-            });
-          
-           
-        },
-        error: function (response) {
-            var r = jQuery.parseJSON(response.responseText);
-            alert("Message: " + r.Message);
-        }
-    });
-}
 function removelink() {
     $.ajax({
         type: "POST",
@@ -2280,74 +2407,4 @@ function removelink() {
         }
     });
 
-}
-
-function deletemcq(id,title)
-{
-   
-    var metricidget = $("#metricid").text();
-    var alert = confirm("Are you sure want to delete this...?");
-    if (alert) {
-        loder();
-        $.ajax({
-            type: "POST",
-            url: "naaceasy.aspx/getmcqlist",
-            data: '{id:"' + id + '",title:"0" }',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                if (title == "1") {
-                    $("#studentchk").prop("checked", false);
-                    $("#studentchk").attr("disabled", false);
-                  
-                }
-                else if (title == "2") {
-                    $("#teacherchk").prop("checked", false);
-                    $("#teacherchk").attr("disabled", false);
-                  
-                }
-                else if (title == "3") {
-                    $("#employerchk").prop("checked", false);
-                    $("#employerchk").attr("disabled", false);
-                  
-                }
-                else if (title == "4") {
-                    $("#alumnichk").prop("checked", false);
-                    $("#alumnichk").attr("disabled", false);
-                    
-                }
-                if (countCheckedCheckboxes == 4) {
-                        $("#select_1").prop("checked", true);
-                }
-                else if (countCheckedCheckboxes == 3) {
-                        $("#select_2").prop("checked", true);
-                }
-                else if (countCheckedCheckboxes == 2) {
-                        $("#select_3").prop("checked", true);
-                }
-                else if (countCheckedCheckboxes == 1) {
-                        $("#select_4").prop("checked", true);
-                }
-                else {
-                    $("#select_1").prop("checked", false);
-                    $("#select_2").prop("checked", false);
-                    $("#select_3").prop("checked", false);
-                    $("#select_4").prop("checked", false);
-                }
-                    getmcqfile(metricidget);
-              
-            },
-            error: function (response) {
-                var r = jQuery.parseJSON(response.responseText);
-                alert("Message: " + r.Message);
-            }
-        });
-        stoploader();
-    }
-   
-    else {
-
-        return false;
-
-    }
 }

@@ -1,0 +1,72 @@
+﻿<div class="col-lg-8" id="Qualitative" style="padding-right: 24px; padding-left: 0px;">
+    <div class="box box-primary direct-chat direct-chat-primary">
+
+        <div class="box-body">
+            <div class="direct-chat-messages">
+                <div class="direct-chat-msg">
+                    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                        <div class="form-group">
+                            <label class="datastylelabel">
+                                <b>Q.</b> <span id="qualitativequestion" style="line-height: 24px;font-size:16px;font-weight:400">
+                                    Curricula developed and implemented have relevance to the local,
+                                    national, regional and global developmental needs, which is reflected
+                                    in the Programme outcomes (POs), Programme Specific
+                                    Outcomes(PSOs) and Course Outcomes(COs) of the Programmes
+                                    offered by the UniversityWrite description in a maximum of 500 wordsFile Description (Upload)Upload Additional informationProvide Link for Additional information
+                                </span>
+                            </label>
+                            <textarea id="txt_qualitative" class="form-control" placeholder="Eg: Enter the metric qualitative inforamtion..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 2px solid #dddddd; padding: 10px;border-radius: 16px;font-size: 16px !important;" disabled="disabled"></textarea>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4" style="padding-right: 0px; padding-left: 0px;" id="fileupload">
+    <div class="box box-primary direct-chat direct-chat-primary">
+
+        <div class="box-body">
+            <div class="direct-chat-messages">
+                <div class="direct-chat-msg">
+                    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                        <div class="form-group">
+                            <label class="datastylelabel">Link to relevant documents <img src="../Img/exclamation_small.svg"></label>
+                            <input type="text" class="form-control" id="txt_linktodocument" placeholder="Eg: https://testing.pdf">
+                        </div>
+                        <div class="col-lg-12" style="padding-left:0px;padding-right:0px;padding-bottom: 15px;" id="linkshow">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                        <div class="form-group">
+                            <label class="datastylelabel">Files uploaded<img src="../Img/exclamation_small.svg"></label>
+
+                            <div class="file-field">
+                                <div class="btn btn-outline-primary waves-effect float-left">
+                                    <span style="font-weight: 600;font-size: 16px;line-height: 20px;"><img src="../Img/arrow.up.doc.svg"> File Upload</span>
+                                    <input type="file" name="fuUpload" id="fuUpload" onchange="uploaddatafile()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                        <div class="progress-group" style="display:none" id="progressreport">
+                            <div class="progress sm">
+                                <div class="progress-bar progress-bar-aqua" style="width:0%">0%</div>
+                                <div class="msg" style="display:none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="padding-left:0px;padding-right:0px;height:168px" id="filelistshow">
+
+                        <div style="padding-bottom: 5px;">1. <a class="btn btn-primary" style="color: white;border-radius: 16PX;" href="../Datametricfiles/44.xls" target="_blank"><i class="fa fa-view"></i>Fill_Paid_Days_Jan_2022_GKII</a><img src="../Img/trash.svg" style="float: right;cursor: pointer;" onclick="deletefile(44)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
